@@ -1,0 +1,175 @@
+\documentclass[PhD]{dukethesis2006}
+
+%preamble here for options
+
+%-----------------------------------------------------------------------------%
+% DEFINITIONS:
+%
+% include \usepackage here
+%-----------------------------------------------------------------------------%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{xy}
+\usepackage{tabularx}\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{textgreek}
+\usepackage{listings}
+\usepackage{seqsplit}
+\usepackage[raggedright]{titlesec}
+
+\input{bob_macros.tex} 
+% This is where the shortened versions of Latex environments like figure, equation, etc 
+% are defined. See the file for the shortcuts.
+
+\author{William Jared Brewer}
+\advisor{David M. Tobin}
+\member{J. Andrew Alspaugh}
+\member{John F. Rawls}
+\member{Christopher Kontos}
+\member{Dennis Ko}
+
+\department{Molecular Genetics and Microbiology}
+%\subject{xxx} If this is used, "subject" has to be un-commented in the cls file in several places
+\title{Cellular Signaling Mechanisms Underlying the Angiogenic Response to Mycobacterial Infection}
+
+%end of preamble, beginning of printable document
+
+\begin{document}
+
+\maketitle{}
+
+\makeabstract{}
+
+\Copyright
+
+\begin{doublespace}
+
+\abstract
+
+Pathological angiogenesis is a widespread phenomenon that influences the progression of a variety of diseases, including autoimmune conditions, cancers, and microbial infections. One infection in particular, tuberculosis, has been found to induce a potent pro-angiogenic signaling cascade that facilitates bacterial growth and accelerates disease progression. Despite these recent findings, many of the underlying host response mechanisms remain unknown. A synthesis of early studies on bacterial factors that drive host angiogenesis with modern genetic findings identified the mycobacterial glycolipid trehalose 6-6'-dimycolate (TDM) as a critical factor driving VEGF production and angiogenesis during mycobacterial infection. 
+
+Chapter 2 describes the new methodological approaches that were required to complete this work. This work utilizes the zebrafish-\textit{Mycobacterium marinum} model of tuberculosis infection to better understand these phenomena. Using this model in tandem with human macrophage cell culture, I was able to model major aspects of the host-pathogen interface, enabling me to identify a critical role for a macrophage-C-type lectin receptor-NFATC2-VEGFA signaling axis required for the angiogenic response to mycobacterial infection and TDM, findings that comprise the core of this work and are detailed at length in Chapter 3. 
+
+The analysis of the large amounts of data generated in this work required creative approaches to data processing and analysis. To this end, I have developed a set of novel processing modalities in Python and R that are capable of the rapid and reproducible processing of images as well as certain aspects of automated data collection therefrom. These macros, many written for the FIJI/ImageJ programming environment, serve as the infrastructure on which the rest of this work has been built. These will be detailed in Chapter 4.
+
+Finally, this body of work leaves many questions as yet unanswered. While it is clear that NFAT signaling is required for VEGFA production, the precise mechanism by which this may work is unclear and could be mediated by either direct DNA binding or indirect activation or cooperative binding with some other transcriptional activator. It is my hope that the findings herein stimulate further study on the contributions of NFAT signaling to the host immune response to mycobacterial infection and evaluation of the potential of NFAT inhibition as host-directed therapy to tuberculosis.
+
+\dedication
+
+For my daily motivation and inspiration; for the person who taught me to read and write, who always believed I could do anything I set my mind to, and who dreamt of this day - my Mamaw Barb.
+
+\end{doublespace}
+
+\listoftables
+
+\listoffigures
+
+\acknowledgements
+
+\begin{doublespace}
+
+This document is the culmination of my entire academic career to date and would have been impossible without all of the people along the way who have supported, inspired, and taught me all I needed to get here. The number of people who warrant thanks exceeds my capacity to thank them and the space allotted. 
+
+My journey into the world of learning would not have been possible without the manifold contributions of those primary and secondary school teachers who saw my potential and worked to help me achieve it. From kindergarten all the way to my senior year of high school I had beacons who helped me to overcome the conditions into which I was born. 
+
+The inflection point of my life was the four years I spent at Transylvania University. This was the place where I really found myself and was pushed to my intellectual limits and beyond and was the place I truly discovered a love for teaching. Paul Duffin introduced me to the wonders of bench science and gave me a platform to learn, discover, and fail that gave me the precise mentality I needed to succeed in graduate school. Scott Whiddon has always been my \#1 cheerleader and has been an invaluable source of support both throughout my time at Transylvania and into the present day. Michael Cairo sparked in me a love for political science and gave me the support, affirmation, and down-to-earth advising I needed to find my own academic identity. Lastly, Jeff Freyman gave me the most rigorous and exhilarating set of academic experiences of my life to date -- the courses I took with him showed me the power to change someone's life in the classroom because his changed mine entirely.
+
+Of course, college is not merely the classes you take and I had the privilege of meeting countless friends who taught me who I was and who I wanted to become, many of whom have been with me for the past decade. Bobby Puckett is the first of my peers I had ever met who filled me with intellectual awe and his mentorship, especially in my first-year of college really set me on a path to success. I also had the privilege to surround myself with an amazing set of immediate peers -- Chanslor Gallenstein, Drew Cunningham, Ryan Hanson, Susan Northcutt, and Quentin Becker -- who have been there from the day we moved into the dormitory until today. As my college career advanced, I had the opportunity to meet incredible people at every stage who made a difference. Jared Auton is an impeccable soul with a fervor for art who taught me about the beauty of the world around us. Daniel Martell gave me an invaluable opportunity in mentorship and taught me how \textit{I} could make a real difference in the lives of others. And Daniel Cooper is shining light of positivity and joy who keeps me thinking with a positive mindset and with nothing but hope for the future.
+
+Graduate school itself, of course, has been a wonderful experience in growth and difficulty. From the first days of this experience, there has been one person who I have been able to rely on for support. Andy Alspaugh has always believed in me and my ability to go on and has always encouraged me to pursue my dreams. His kindness is an immeasurable inspiration I can only attempt to replicate. Graduate school has also been about all of the peers I have had the joy to meet, including Joe Saelens, Eric Walton, Allison Roder, Shannon Esher, Hannah Brown, Al Harding, and Matt Sacco. My time in Durham has also brought a lost connection back - Austin Farmer - one of the very few who also left our hometown to experience something different. 
+
+Of course, my advisor, David Tobin, has been a constant and unconditional source of support and encouragement through the long experimentation that was required for much of the work presented in these coming pages. He provided me the academic and scientific freedom to find my path in science and to fail (repeatedly) with the unwavering faith that I would succeed. The trials and tribulations of graduate school would have been impossible to overcome without his support.
+
+Lastly, I want to thank my loving partner, Kristen, who has believed in me and supported me throughout the past 4 years. As is often said of the long-suffering partner, she has tolerated the days, nights, and weeks that I was completely absent and, when I finally had a break, welcomed me home with no (visible) resentment and for that I will be forever thankful.
+
+\end{doublespace}
+
+\tableofcontents
+
+%-----------------------------------------------------------------------------%
+% replace FILE in \input{FILE} with name of tex file
+% containing the given chapter, eg. for the introduction one could
+% have FILE = intro if stored in intro.tex (.tex extension is assumed!).
+%-----------------------------------------------------------------------------%
+
+\chapter{Introduction}
+\pagenumbering{arabic}
+
+%A large document requires a lot of input. Rather than putting the whole input in a single large file, it's more efficient to split it into several smaller ones. Regardless of how many separate files you use, there is one that is the root file; it is the one whose name you type when you run LaTeX. In this template, the introduction chapter is an external file (intro.tex) and the second chapter is contained internally in the root file (in this file you are reading)
+
+\begin{doublespace}
+\input{intro}
+\end{doublespace}
+
+\chapter{Scientific Methodology}
+
+\begin{doublespace}
+\input{methods}
+\end{doublespace}
+
+\chapter[Macrophage NFATC2 Drives Angiogenic Signaling During Mycobacterial Infection]{Macrophage NFATC2 Drives Angiogenic Signaling During Mycobacterial Infection\footnote{Most of the data in this chapter is from Brewer et al. 2022 \textit{Cell Reports}, text extensively modified.}}
+
+\begin{doublespace}
+\input{nfat}
+\end{doublespace}
+
+\chapter{Novel Computational Approaches to Image Processing and Quantitation}
+
+\input{software.tex}
+
+\chapter{Conclusions and Future Directions}
+
+\input{conclusion.tex}
+
+%Ist jes ene nenii frikativo , hej op kuzo respondvorto. Ts frazparto komentofrazo iam, giga aliio ci hop. Ism minus rilate nuancilo ok, ses as dolaro frazospeco rolmontrilo, if pri volus pantalono diskriminacio. Mi mem plej rolvortajo, dume horo centimetro uj jes. \cite{Jones2002} As we have seen in section \ref{subsec:bigponies}, Big Ponies rule!
+%
+%\fig
+%\begin{center}
+%\epsfig{figure=images/hertz.eps}
+%\caption{Venn Diagram}
+% Provide a label so we can cross-reference it from the tex
+%\label{venn.figure}
+%\end{center}
+%\efig
+%
+%\begin{figure}
+%\begin{center}
+%\includegraphics[height=.5in]{images/hertz}
+%\caption{Venn Diagram}
+% Provide a label so we can cross-reference it from the tex
+%\label{figure:venn}
+%\end{center}
+%\end{figure}
+
+%Okupi identiga kuo bo, via oble bek'o komentofrazo\footnote{Dume horo centimetro uj jes 1884.} ot, trema ilion negativaj cis nk. Co ebl malsupera kvadriliono, iz duono malantaue tiu, milo franjo ato al. Des solinfano parentezo hu. Peti responde tc ioj, ej tempismo pronomeca praantaulasta igi. Per nedifina popolnomo nk, ki ekoo kune sat. Hav frota akuzativo ar.
+%
+%
+%So ebl poste posta nombrovorto, nul be fine jugoslavo kontraui. Sub ac deka sube, orda hiper u jam. Plu onin iometo ej, os peti irebla per. Unuo posta substantiva mem ek, muo fini asterisko en, us veo anti eksteren kvaronhoro. Ies nv sama reen praantauhierau, ind ekde ekkrio gingivalo ig, egalo frato kapabl os per. De por fora ofon altlernejo.
+
+%\begin{thebibliography}{99}
+%\bibitem{a} Author. Title. 1857
+%\bibitem{b} Author 2. Title. 1916
+%\bibitem{c} Author 3. Title. 1961
+%\end{thebibliography}
+\nocite{*}
+\bibliographystyle{cell}
+\bibliography{lit}
+	
+\biography
+%-----------------------------------------------------------------------------%
+% For PhD Biography,
+% -- Talk about YOU:  
+% -- be sure to include publications, awards, fellowships, etc.
+%-----------------------------------------------------------------------------%
+
+\begin{doublespace}
+
+Jared was born in the mountains of Appalachia in Barbourville, KY in 1994. After graduating valedictorian from Barbourville High School, he enrolled at Transylvania University in Lexington, KY where he received a Bachelor of Arts degree in Biology and Political Science, \textit{summa cum laude}. In the fall of 2016, he began his Ph.D. at Duke University in the Molecular Genetics and Microbiology department, having been awarded a James B. Duke Fellowship. He then joined the lab of David Tobin in the summer of 2017. In his time at Duke, he was awarded a Ruth L. Kirschstein National Research Service Award F31 fellowship from the National Heart, Lung, and Blood Institute.
+
+\end{doublespace}
+
+\end{document}
