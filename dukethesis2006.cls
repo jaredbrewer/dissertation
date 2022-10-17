@@ -73,7 +73,7 @@
 
 
 \typeout{-----------------------------------------------------------------}
-\typeout{Document Class `dukethesis2004'.}
+\typeout{Document Class `dukethesis2006'.}
 %\typeout{}
 %\typeout{Revisions made in July, 1996, by Sean O'Connell and Michael
 %  Todd} \typeout{ from the Dept. of Mechanical Engineering.}
@@ -1364,14 +1364,14 @@
 %       name of a committee member (sole argument) below the line.
 \newcommand{\@member}[1]{\begin{center}
   \raisebox{-8pt}[0pt][17pt]{\rule{2.8in}{.5pt}}\par    % Print line.
-  \raisebox{pt}[0pt][0pt]{#1}\par\end{center}     % Print member name below.
+  \raisebox{pt}[3pt][0pt]{#1}\par\end{center}     % Print member name below.
 }
 
 \newcounter{@members}           % Number of member macros defined so far.
 \newcommand{\@membera}{\@member{\@advisor, Supervisor}}
 \setcounter{@members}{1}        % Advisor is always 1st member
 
-% @minmembers -- holds mimumum number of member macros needed.  It is set in
+% @minmembers -- holds minumum number of member macros needed.  It is set in
 % \maketitle.
 \newcounter{@minmembers}
 
@@ -1438,8 +1438,9 @@
       \begin{center}
       \parbox{2.8in}{
         Date:\hfill\rule[-.4ex]{2.35in}{.5pt}\par
+        \vspace*{0.01in}
         Approved:
-        \vspace*{0in}
+        \vspace*{0.2in}
         { \centering\normalsize
           % @membersprinted counts the number of committee members printed so far
           \setcounter{@membersprinted}{0}
@@ -1449,15 +1450,22 @@
             \addtocounter{@membersprinted}{1}
             \ifcase\value{@membersprinted}
               \typeout{Thesis style--internal error printing members.} \or
-              \@membera \or
-              \@memberb \or
-              \@memberc \or
-              \@memberd \or
-              \@membere \or
-              \@memberf \or
-              \@memberg \or
-              \@memberh
-            \else \typeout{Thesis style--internal error printing members.}
+            \@membera \or
+            \vspace*{0.2in}
+            \@memberb \or
+            \vspace*{0.2in}
+            \@memberc \or
+            \vspace*{0.2in}
+            \@memberd \or
+            \vspace*{0.2in}
+            \@membere \or
+            \vspace*{0.2in}
+            \@memberf \or
+            \vspace*{0.2in}
+            \@memberg \or
+            \vspace*{0.2in}
+            \@memberh
+            \vspace*{0.2in}            \else \typeout{Thesis style--internal error printing members.}
             \fi
           \repeat
           % If the minimum number of signature lines haven't been printed,
@@ -1554,13 +1562,21 @@
           \ifcase\value{@membersprinted}
             \typeout{Thesis style--internal error printing members.} \or
             \@membera \or
+            \vspace*{0.2in}
             \@memberb \or
+            \vspace*{0.2in}
             \@memberc \or
+            \vspace*{0.2in}
             \@memberd \or
+            \vspace*{0.2in}
             \@membere \or
+            \vspace*{0.2in}
             \@memberf \or
+            \vspace*{0.2in}
             \@memberg \or
+            \vspace*{0.2in}
             \@memberh
+            \vspace*{0.2in}
           \else \typeout{Thesis style--internal error printing members.}
           \fi
         \repeat
@@ -1577,6 +1593,7 @@
     \vglue 2ex
 
     \begin{center}
+    \vspace*{0.2in}
       {\normalsize
         An abstract of a
         \ifPhD
