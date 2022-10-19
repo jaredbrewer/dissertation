@@ -1783,6 +1783,7 @@
 
 %% \doublespacing
 
+\def\theadfont{\bfseries}
 
 \typeout{end of dukethesis2004.cls}
 
