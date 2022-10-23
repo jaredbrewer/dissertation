@@ -1784,8 +1784,15 @@
 %% \doublespacing
 
 \def\theadfont{\bfseries}
+\def\chapterautorefname{Chapter}%
+\def\sectionautorefname{Section}%
+\def\subsectionautorefname{Subsection}%
+\def\subsubsectionautorefname{Subsubsection}%
+\def\paragraphautorefname{Paragraph}%
+\def\tableautorefname{Table}%
+\def\equationautorefname{Equation}%
 
-\typeout{end of dukethesis2004.cls}
+\typeout{end of dukethesis2006.cls}
 
 \endinput
 %%

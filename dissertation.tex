@@ -18,11 +18,13 @@
 \usepackage{longtable}
 \usepackage{makecell}\usepackage{parskip}
 \usepackage{setspace}
+\usepackage{changepage}
 \usepackage{textgreek}
 \usepackage{listings}
 \usepackage{seqsplit}
 \usepackage[raggedright]{titlesec}
 \usepackage{natbib}
+% \usepackage[natbib=true]{biblatex}
 \usepackage{hyperref}
 
 \hypersetup{
@@ -110,7 +112,7 @@ Lastly, I want to thank my loving partner, Kristen, who has believed in me and s
 % have FILE = intro if stored in intro.tex (.tex extension is assumed!).
 %-----------------------------------------------------------------------------%
 
-\chapter{Introduction}
+\chapter{Introduction}\label{intro}
 \pagenumbering{arabic}
 
 %A large document requires a lot of input. Rather than putting the whole input in a single large file, it's more efficient to split it into several smaller ones. Regardless of how many separate files you use, there is one that is the root file; it is the one whose name you type when you run LaTeX. In this template, the introduction chapter is an external file (intro.tex) and the second chapter is contained internally in the root file (in this file you are reading)
@@ -119,34 +121,41 @@ Lastly, I want to thank my loving partner, Kristen, who has believed in me and s
 \input{intro}
 \end{doublespace}
 
-\chapter{Scientific Methodology}
+\chapter{Scientific Methodology}\label{methods}
 
 \begin{doublespace}
 \input{methods}
 \end{doublespace}
 
-\chapter[Macrophage NFATC2 Drives Angiogenic Signaling During Mycobacterial Infection]{Macrophage NFATC2 Drives Angiogenic Signaling During Mycobacterial Infection\footnote{Most of the data in this chapter is from Brewer et al. 2022 \textit{Cell Reports}, text extensively modified.}}
+\chapter[Macrophage NFATC2 Drives Angiogenic Signaling During Mycobacterial Infection]{Macrophage NFATC2 Drives Angiogenic Signaling During Mycobacterial Infection\footnote{Most of the data in this chapter is from Brewer et al. 2022 \textit{Cell Reports}, text extensively modified.}}\label{chap3}
 
 \begin{doublespace}
 \input{nfat}
 \end{doublespace}
 
-\chapter{Novel Computational Approaches to Image Processing and Quantitation}
+\chapter{Novel Computational Approaches to Image Processing and Quantitation}\label{chap4}
 
 \begin{doublespace}
 \input{software.tex}
 \end{doublespace}
-\chapter{Conclusions and Future Directions}
+\chapter{Conclusions and Future Directions}\label{conclusions}
 
 \begin{doublespace}
 \input{conclusion.tex}
 \end{doublespace}
 
-\chapter{Appendix A: Reagents Used}
+\chapter{Appendix A: Reagents Used}\label{reagents}
 
 \begin{doublespace}
 \input{appendixA.tex}
 \end{doublespace}
+
+%\chapter{Appendix B: Response to Reviewers for \citep{brewer2022}}
+%
+%\begin{doublespace}
+%\input{appendixB.tex}
+%\end{doublespace}
+
 
 %Ist jes ene nenii frikativo , hej op kuzo respondvorto. Ts frazparto komentofrazo iam, giga aliio ci hop. Ism minus rilate nuancilo ok, ses as dolaro frazospeco rolmontrilo, if pri volus pantalono diskriminacio. Mi mem plej rolvortajo, dume horo centimetro uj jes. \cite{Jones2002} As we have seen in section \ref{subsec:bigponies}, Big Ponies rule!
 %
@@ -181,6 +190,8 @@ Lastly, I want to thank my loving partner, Kristen, who has believed in me and s
 \nocite{*}
 \bibliographystyle{agsm}
 \bibliography{lit}
+
+% \printbibliography[title={Further Reading},notcategory=cited]
 	
 \biography
 %-----------------------------------------------------------------------------%
