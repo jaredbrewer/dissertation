@@ -24,8 +24,9 @@
 \usepackage{listings}
 \usepackage{seqsplit}
 \usepackage[raggedright]{titlesec}
-\usepackage{natbib}
-% \usepackage[natbib=true]{biblatex}
+% \usepackage{natbib}
+\usepackage[natbib=true,backend=bibtex,style=authoryear]{biblatex}
+\addbibresource{lit.bib}
 \usepackage{hyperref}
 
 \hypersetup{
@@ -182,15 +183,14 @@ Lastly, I want to thank my loving partner, Kristen, who has believed in me and s
 %
 %
 %So ebl poste posta nombrovorto, nul be fine jugoslavo kontraui. Sub ac deka sube, orda hiper u jam. Plu onin iometo ej, os peti irebla per. Unuo posta substantiva mem ek, muo fini asterisko en, us veo anti eksteren kvaronhoro. Ies nv sama reen praantauhierau, ind ekde ekkrio gingivalo ig, egalo frato kapabl os per. De por fora ofon altlernejo.
-
-%\begin{thebibliography}{99}
+%\begin{thebibliography}{99}
 %\bibitem{a} Author. Title. 1857
 %\bibitem{b} Author 2. Title. 1916
 %\bibitem{c} Author 3. Title. 1961
 %\end{thebibliography}
-\nocite{*}
-\bibliographystyle{agsm}
-\bibliography{lit}
+% \nocite{*}
+% \bibliographystyle{agsm}
+\printbibliography
 
 % \printbibliography[title={Further Reading},notcategory=cited]
 	
