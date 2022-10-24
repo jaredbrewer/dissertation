@@ -1783,7 +1783,7 @@
 
 %% \doublespacing
 
-\def\theadfont{\bfseries}
+% \def\theadfont{\bfseries}
 \def\chapterautorefname{Chapter}%
 \def\sectionautorefname{Section}%
 \def\subsectionautorefname{Subsection}%
