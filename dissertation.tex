@@ -7,28 +7,31 @@
 %
 % include \usepackage here
 %-----------------------------------------------------------------------------%
+
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{unicode-math}
 \usepackage{array}
 \usepackage{epsfig}
 \usepackage{graphicx}
 \usepackage{xy}
+\usepackage{hyphenat}
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{makecell}
-% \usepackage[greek,english]{babel}
 \renewcommand\theadfont{\bfseries}\usepackage{parskip}
 \usepackage{setspace}
 \usepackage{changepage}
-\usepackage{textgreek}
-% \usepackage{alphabeta}
 \usepackage{listings}
 \usepackage{seqsplit}
 \usepackage[raggedright]{titlesec}
-% \usepackage{natbib}
-\usepackage[natbib=true,backend=bibtex,style=authoryear]{biblatex}
+\usepackage[natbib=true,backend=bibtex,style=authoryear,maxbibnames=99]{biblatex}
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
 \addbibresource{lit.bib}
+\nocite{*} 
+
 \usepackage[unicode]{hyperref}
 
 \hypersetup{
@@ -41,7 +44,8 @@
     }
 \urlstyle{same}
 
-\input{bob_macros.tex} 
+\input{bob_macros.tex}
+
 % This is where the shortened versions of Latex environments like figure, equation, etc 
 % are defined. See the file for the shortcuts.
 
@@ -100,7 +104,7 @@ The inflection point of my life was the four years I spent at Transylvania Unive
 
 Of course, college is not merely the classes you take and I had the privilege of meeting countless friends who taught me who I was and who I wanted to become, many of whom have been with me for the past decade. Bobby Puckett is the first of my peers I had ever met who filled me with intellectual awe and his mentorship, especially in my first-year of college really set me on a path to success. I also had the privilege to surround myself with an amazing set of immediate peers -- Chanslor Gallenstein, Drew Cunningham, Ryan Hanson, Susan Northcutt, and Quentin Becker -- who have been there from the day we moved into the dormitory until today. As my college career advanced, I had the opportunity to meet incredible people at every stage who made a difference. Jared Auton is an impeccable soul with a fervor for art who taught me about the beauty of the world around us. Daniel Martell gave me an invaluable opportunity in mentorship and taught me how \textit{I} could make a real difference in the lives of others. And Daniel Cooper is shining light of positivity and joy who keeps me thinking with a positive mindset and with nothing but hope for the future.
 
-Graduate school itself, of course, has been a wonderful experience in growth and difficulty. From the first days of this experience, there has been one person who I have been able to rely on for support. Andy Alspaugh has always believed in me and my ability to go on and has always encouraged me to pursue my dreams. His kindness is an immeasurable inspiration I can only attempt to replicate. Graduate school has also been about all of the peers I have had the joy to meet, including Joe Saelens, Eric Walton, Allison Roder, Shannon Esher, Hannah Brown, Al Harding, and Matt Sacco. My time in Durham has also brought a lost connection back - Austin Farmer - one of the very few who also left our hometown to experience something different. 
+Graduate school itself, of course, has been a wonderful experience in growth and difficulty. From the first days of this experience, there has been one person who I have been able to rely on for support. Andy Alspaugh has always believed in me and my ability to go on and has always encouraged me to pursue my dreams. His kindness is an immeasurable inspiration I can only attempt to replicate. Graduate school has also been about all of the peers I have had the joy to meet, including Joe Saelens, Eric Walton, Molly Matty, Allison Roder, Shannon Esher, Hannah Brown, Al Harding, Matt Sacco, and Mollie Sweeney. My time in Durham has also brought a lost connection back - Austin Farmer - one of the very few who also left our hometown to experience something different. 
 
 Of course, my advisor, David Tobin, has been a constant and unconditional source of support and encouragement through the long experimentation that was required for much of the work presented in these coming pages. He provided me the academic and scientific freedom to find my path in science and to fail (repeatedly) with the unwavering faith that I would succeed. The trials and tribulations of graduate school would have been impossible to overcome without his support.
 
@@ -160,9 +164,6 @@ Lastly, I want to thank my loving partner, Kristen, who has believed in me and s
 %\input{appendixB.tex}
 %\end{doublespace}
 
-
-%Ist jes ene nenii frikativo , hej op kuzo respondvorto. Ts frazparto komentofrazo iam, giga aliio ci hop. Ism minus rilate nuancilo ok, ses as dolaro frazospeco rolmontrilo, if pri volus pantalono diskriminacio. Mi mem plej rolvortajo, dume horo centimetro uj jes. \cite{Jones2002} As we have seen in section \ref{subsec:bigponies}, Big Ponies rule!
-%
 %\fig
 %\begin{center}
 %\epsfig{figure=images/hertz.eps}
@@ -181,18 +182,11 @@ Lastly, I want to thank my loving partner, Kristen, who has believed in me and s
 %\end{center}
 %\end{figure}
 
-%Okupi identiga kuo bo, via oble bek'o komentofrazo\footnote{Dume horo centimetro uj jes 1884.} ot, trema ilion negativaj cis nk. Co ebl malsupera kvadriliono, iz duono malantaue tiu, milo franjo ato al. Des solinfano parentezo hu. Peti responde tc ioj, ej tempismo pronomeca praantaulasta igi. Per nedifina popolnomo nk, ki ekoo kune sat. Hav frota akuzativo ar.
-%
-%
-%So ebl poste posta nombrovorto, nul be fine jugoslavo kontraui. Sub ac deka sube, orda hiper u jam. Plu onin iometo ej, os peti irebla per. Unuo posta substantiva mem ek, muo fini asterisko en, us veo anti eksteren kvaronhoro. Ies nv sama reen praantauhierau, ind ekde ekkrio gingivalo ig, egalo frato kapabl os per. De por fora ofon altlernejo.
-%\begin{thebibliography}{99}
-%\bibitem{a} Author. Title. 1857
-%\bibitem{b} Author 2. Title. 1916
-%\bibitem{c} Author 3. Title. 1961
-%\end{thebibliography}
 % \nocite{*}
 % \bibliographystyle{agsm}
-\printbibliography
+% \printbibliography[heading=bibintoc,title={Bibliography}]
+\printbibliography[category=cited]
+\printbibliography[title={Cite Me Please},notcategory=cited]
 
 % \printbibliography[title={Further Reading},notcategory=cited]
 	
