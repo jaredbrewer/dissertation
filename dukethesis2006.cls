@@ -1364,7 +1364,7 @@
 %       name of a committee member (sole argument) below the line.
 \newcommand{\@member}[1]{\begin{center}
   \raisebox{-8pt}[0pt][17pt]{\rule{2.8in}{.5pt}}\par    % Print line.
-  \raisebox{pt}[3pt][0pt]{#1}\par\end{center}     % Print member name below.
+  \raisebox{0pt}[3pt][0pt]{#1}\par\end{center}     % Print member name below.
 }
 
 \newcounter{@members}           % Number of member macros defined so far.
