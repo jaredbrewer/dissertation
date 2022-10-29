@@ -895,15 +895,15 @@
 %  Page breaks are discouraged by \interlinepenalty=150.
 %
 %----------------------------------------------------------------------
-\begingroup \catcode `|=0 \catcode `[=1
-\catcode`]=2 \catcode`\{=12 \catcode `\}=12
-\catcode`\\=12 |gdef|@xcode#1\end{code}[#1|end[code]]
-|endgroup
-\newenvironment{code}
-               {\par\list{}
-                 {\parskip 0pt plus 1pt\normalbaselines\interlinepenalty=150}
-               \item\relax\@verbatim\frenchspacing\@vobeyspaces\@xcode}
-               {\endtrivlist\endlist}
+%\begingroup \catcode `|=0 \catcode `[=1
+%\catcode`]=2 \catcode`\{=12 \catcode `\}=12
+%\catcode`\\=12 |gdef|@xcode#1\end{code}[#1|end[code]]
+%|endgroup
+%\newenvironment{code}
+%               {\par\list{}
+%                 {\parskip 0pt plus 1pt\normalbaselines\interlinepenalty=150}
+%               \item\relax\@verbatim\frenchspacing\@vobeyspaces\@xcode}
+%               {\endtrivlist\endlist}
 
 %----------------------------------------------------------------------
 %

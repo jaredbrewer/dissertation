@@ -8,7 +8,7 @@
 
 High-resolution, high-throughput microscopy has opened possibilities for biological analysis that were inconceivable only a few short years ago, but the methods by which to analyze these data remain largely lacking. While heroic efforts have been made to use both standard thresholding methods as well as newer machine learning-powered methods to simplify and automate image processing, these approaches are often somewhat limited the range of purposes for which they were designed. Additionally, many of the tasks that experimenters seek to do are both relatively simple and highly repetitive but they are often unaware of the means by which to cut down on manual processing time in order to economize their time and energies. These scripts are a combination of automation scripts that will process particular image types into smaller and more informative images (compression of Z-stacks, time-series, etc.) and those meant for analysis of image data (pixel intensity distribution across an image, bacterial burden within larval zebrafish). While none of these are of the caliber to open entirely new methods of analysis, I hope they are a catalyst for others in the zebrafish community at large to explore the potential for computational automation to save time and frustration in the process of analyzing often thousands of very large, data-rich images.
 
-All of the scripts, in their latest versions will be able to be found in perpetuity at \href{http://github.com/jaredbrewer/image-analysis}. A static version of these has been created at Zenodo (). Scripts at the end for RNA sequencing analysis are available at Zenodo (). 
+All of the scripts in their latest versions will be able to be found in perpetuity at \href{http://github.com/jaredbrewer/image-analysis}. A static version of these has been created at Zenodo (). Scripts at the end for RNA sequencing analysis are available at Zenodo (). 
 
 \section{FIJI/ImageJ}\label{fiji}
 
@@ -16,11 +16,160 @@ All of the scripts, in their latest versions will be able to be found in perpetu
 
 \section{Maximum-Intensity Projection and Composite Image Generation}
 
-\section[Surface Plot Analysis for Cellular Distribution of Labeled Proteins]{Surface Plot Analysis for Cellular Distribution of Labeled Proteins\footnote{Taken from personal contributions to \citep{Saelens2022}.}}
+The fundamental premise of the ImageJ macro system is to simplify repetitive tasks to free up user time for higher forms of analysis, but the default language (the ImageJ1 macro language) make it easy to write procedural operations to be done on single images, but is difficult to scale to whole directories of images or accept various types of user input. I have thus developed a set of scripts that allow the user to rapidly generate maximum-intensity projections from sets of images and then generate composite images. This often condenses hundreds of megabytes of data into $<$30 MB, allows more flexible image viewing and understanding, and allows the images to be opened in essentially any number (many hundreds to thousands) on any personal computer. These procedures are also internally memory managed, allowing them to run on most personal computers indefinitely to process the sometimes thousands or tens of thousands of images that can be generated over the course of an experiment with multiple wavelengths, Z stacks, XY positions, and times. In our lab, we primarily use output files from epifluorescent Zeiss microscopes, which generate .czi files and from Metamorph connected to a custom spinning disk confocal system, which generates .tiff files.
+
+The maximum intensity projection is an extremely common way of condensing multidimensional images into a single two-dimension representation by finding the brightest pixel at every XY position and accepting it as the most ``in focus'' pixel. The success of this depends on images being properly exposed, but in most instances will generate a reasonably sharp image ready to be quantitated or presented.
+
+\begin{code}
+\caption{This script allows the user to open as many files as their memory allotment will allow and then to Z project them one at a time with custom start and end positions. This ability often generates cleaner, sharper images by individually selecting the lowest and highest in-focus frames, but necessarily takes more time than a more automated approach.}
+\label{slowmanmip}
+
+\inputminted[breaklines,frame=single]{python}{source/manMIPper.py}
+
+\end{code}
+
+The use of \autoref{slowmanmip} is to process a set of already opened images and generate maximum intensity projections from these and, optionally, save them back into the directory that they came from. This relatively simple set of GUI-guided processes allows the user to, in two clicks, accomplish a task that previously would have required a great deal of menuing to accomplish. The goal is narrow, but this execution is extremely useful when working through large numbers of images.
+
+\begin{code}
+\caption{A low overhead version of the manual maximum intensity projection script described above. Instead of opening all of the images first and then running the script, the script will processively open unanalyzed images one at a time and periodically garbage collect, allowing for entire directories to be processed at once on most reasonably modern computers.}
+\label{fastmanmip}
+
+\inputminted[breaklines,frame=single]{python}{source/fast_manMIPper.py}
+
+\end{code}
+
+\autoref{fastmanmip}, while not always the correct choice depending on user preferences and system capabilities, is much less memory hungry than the original version above, but typically results in slightly slower overall operations due to the delay in opening images. If the images are on fast internal storage, then this is certain to be faster than \autoref{slowmanmip}, but when reading from external storage, the I/O limitations will likely make it faster to open all of the images prior to processing unless system memory is severely limited. Nevertheless, the nature of this makes it very generally useful on older systems.
+
+\begin{code}
+\caption{This script can be used in instances where the first and last stacks of a desired Z projection span the entire set of stacks provided. It will process an entire directory of images together and output the result into a subdirectory of the original.}
+\label{bulkmip}
+
+\inputminted[breaklines,frame=single]{python}{source/bulkMIPper.py}
+
+\end{code}
+
+While the previous scripts have expected user input for each image, the skilled microscopist can select top and bottom slices that will suffice for generating Z projections during imaging itself. This means that the first and last slices of the projection are typically the first and last slices of the images \textit{in toto}. This script takes a directory of images as an input and will perform total maximum intensity projections on all of them and save in a new subdirectory. After observation, any that seem incorrect can then be processed with one of the preceding scripts, especially \autoref{slowmanmip}. 
+
+\begin{code}
+\caption{An interface to functions allowing slices in a Z-stack to be kept or removed as desired through function calls. This can integrate into other workflows and be connected to the previous scripts through higher-order wrappers.}
+\label{reslicer}
+
+\inputminted[breaklines,frame=single]{python}{source/reSlicer.py}
+
+\end{code}
+
+FIJI/ImageJ comes with a built-in option to keep and remove particular slices, but the native plugin does not readily fit into object-oriented programming pipelines like those used by Python and Java. Thus, I have adapted the underlying logic of these plugins to be wrapped in various other scripts. For instance, this allows calls to the maximum intensity projection plugins to be funneled into this plugin to simultaneously generate the kept slices as well as the maximum intensity projection of those kept slices for some useful improvements to data integrity. 
+
+\section[Surface Plot Analysis for Cellular Distribution of Labeled Proteins]{Surface Plot Analysis for Cellular Distribution of Labeled Proteins\footnote{Taken from personal contributions to \citet{Saelens2022}.}}
+
+\begin{code}
+\caption{A script to conduct computational filename blinding from the command line written in Python.}
+\label{blinder}
+
+\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+
+\end{code}
+
+\begin{code}
+\caption{A script to conduct computational filename blinding from the command line written in Python.}
+\label{blinder}
+
+\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+
+\end{code}
+
+\begin{code}
+\caption{A script to conduct computational filename blinding from the command line written in Python.}
+\label{blinder}
+
+\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+
+\end{code}
+
 
 \section{py-LaRoMe}\label{larome}
 
-\section[Experimental Blinding via a Single-Click Command Line Interface]{Experimental Blinding via a Single-Click Command Line Interface\footnote{Implementation from \citep{Brewer2022}, original conception from \citep{Salter2016}.}}\label{blinders}
+\begin{code}
+\caption{A Python translation of the FIJI function ``Label image to ROIs'' from LaRoMe. This function allows the user to take images generated from CellProfiler and convert them into a set of regions of interest in the ROI Manager.}
+\label{l2r}
 
-\section[User-Friendly Analysis of RNA Sequencing Data using Kallisto/Sleuth in a Python Environment]{User-Friendly Analysis of RNA Sequencing Data using Kallisto/Sleuth in a Python Environment\footnote{Taken and expanded from personal contributions to \citep{Saelens2022}.}}\label{rnaseq}
+\inputminted[breaklines,frame=single]{python}{source/labelsToROIs.py}
+
+\end{code}
+
+\begin{code}
+\caption{A Python translation of the FIJI function ``ROIs to label image'' from LaRoMe. This allows the user to use a set of ROIs to regenerate a label image, useful for creating masks on existing images and comparing areas between different channels.}
+\label{r2l}
+
+\inputminted[breaklines,frame=single]{python}{source/ROIsTolabels.py}
+
+\end{code}
+
+\begin{code}
+\caption{A Python translation of the FIJI function ``ROIs to Measurement Image''. This combines the a defined set of ROIs (probably from labelsToROIs.py) and a raw image and generates an image that graphically represents measurements such as area or circularity.}
+\label{r2m}
+
+\inputminted[breaklines,frame=single]{python}{source/ROIsToMap}
+
+\end{code}
+
+
+\section[Experimental Blinding via a Single-Click Command Line Interface]{Experimental Blinding via a Single-Click Command Line Interface\footnote{Implementation from \citet{Brewer2022}, original conception from \citet{Salter2016}.}}\label{blinders}
+
+\begin{code}
+\caption{A script to conduct computational filename blinding from the command line written in Python.}
+\label{blinder}
+
+\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+
+\end{code}
+
+\section[User-Friendly Analysis of RNA Sequencing Data using Kallisto/Sleuth in a Python Environment]{User-Friendly Analysis of RNA Sequencing Data using Kallisto/Sleuth in a Python Environment\footnote{Taken and expanded from personal contributions to \citet{Saelens2022}.}}\label{rnaseq}
+
+While an old technology today, the analysis of RNA sequencing data still unfairly remains a challenge for the technologically na\"{i}ve researcher. To ameliorate part of this problem, in the course of the work in \citet{Saelens2022}, I developed a set of pipelines for the analysis of RNAseq data using a combination of Kallisto and Sleuth, a pair of analysis and visualization applications that utilize pseudoalignment to calculate read counts and then display them in a Shiny application via R \citep{Pimentel2017}.
+
+Conducting this portion of the work required acquainting myself with a number of commonly used computational tools, including cmake and a deeper knowledge of Python and how that can translate into generating a broadly useful cross-platform tool to analyze complex sequencing data. Doing so also required interfacing with FTP and other networking functions and navigating server directories to fetch reference cDNA from Ensembl.
+
+While these were originally implemented as two parallel scripts, one for bacteria and the other for eukaryotes, they have since been consolidated into a single all-purpose script that requests different input based on what is available. The issue with bacterial analysis is that Ensembl has discontinued generating bioMarts for bacterial genomes and has adopted an unpredictable folder structure for fetching these files via FTP. Thus, the user will have to provide the reference transcriptome of their bacterial strain of choice, which can generally be acquired from species-specific databases (Mycobrowser being the notable one here) or from the set of available strains on NCBI or Ensembl. 
+
+\begin{code}
+\caption{A script to conduct computational filename blinding from the command line written in Python.}
+\label{blinder}
+
+\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+
+\end{code}
+
+\begin{code}
+\caption{A script to conduct computational filename blinding from the command line written in Python.}
+\label{blinder}
+
+\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+
+\end{code}
+
+\begin{code}
+\caption{A script to conduct computational filename blinding from the command line written in Python.}
+\label{blinder}
+
+\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+
+\end{code}
+
+\section{Bacterial Burden Analysis by Fluorescence Intensity in a Semi-Automated Manner with a User-Friendly Graphical Interface}
+
+One of the major routine tasks in the field of zebrafish-\textit{M. marinum} host-pathogen interactions is the quantitation of the total bacterial burden per larva. While it has been well established that the integrated fluorescence intensity of the image corresponds well to the colony forming units of bacteria present, the larval zebrafish has particular challenges. Many of these are attributable to autofluorescence from the yolk and pigment cells or the physical background of the imaging surface, but it is important to avoid catching these in the quantitation as these can vary greatly from fish to fish and are difficult to subtract \textit{post hoc}. However, through clever approaches to image pre-processing it is possible to eliminate these sources of misquantitation and streamline analysis to minimize user intervention.
+
+\begin{code}
+\caption{This graphical user interface allows for automatic background subtraction from images of \textit{M. marinum}-infected larval zebrafish and then quantitation of the remaining signal above a manually set threshold that captures as much of the true signal as possible.}
+\label{burden}
+
+\inputminted[breaklines,frame=single]{python}{source/burdenMeasurer.py}
+
+\end{code}
+
+This graphical user interface facilitates automatic processing of arbitrary numbers of images at once by allowing users to select various parameters to test for appropriateness in their particular experiment. The underlying logic will automatically create Z projections if applicable and then use those for subsequent analysis. Users are encouraged to select a subset of images to start and the computational thresholds are used to capture any objects over a certain size for background removal, which will typically only capture the yolk and any background fluorescence. This approach also allows for more generous manual thresholds to be selected for quantitation, an issue that often arises in manual approaches to fluorescence quantitation due to the need to accommodate this autofluorescence. 
+
+It is my hope that this application, after further beta testing and refinement can supplant these manual approaches and replace them with something that free researcher time to conduct more experiments rather than spend many hours drawing circles around zebrafish in order to measure the bacterial burden of these fish. Additionally, this could in principle to adapted to measuring other aspects of zebrafish biology, from macrophage clustering to transcriptional reporter signals. The elegance of this approach is that it utilizes open-source and well-defined mechanisms for measuring signal over noise through the implementation of the automatic thresholds and wraps a set of utility functions within an interface that avoids the need for the end user to write burdensome macros to accomplish the same goal. This approach, after a minutes-long period of optimizing is able to measure the burden of thousands of larvae in mere minutes. The output can then be spot-checked for accuracy, as in a small subset of the larvae parts of the background may not be perfectly removed and these can then be reprocessed either manually or with altered parameters. 
+
 

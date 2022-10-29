@@ -25,6 +25,9 @@
 \usepackage{setspace}
 \usepackage{changepage}
 \usepackage{listings}
+\usepackage[newfloat,cache=false,outputdir=.texpadtmp]{minted}
+\renewcommand{\MintedPygmentize}{/opt/homebrew/Caskroom/mambaforge/base/bin/pygmentize}
+\usepackage{caption}
 \usepackage{seqsplit}
 \usepackage[raggedright]{titlesec}
 \usepackage[natbib=true,backend=bibtex,style=authoryear,maxbibnames=99]{biblatex}
@@ -44,6 +47,9 @@
     pdfpagemode=FullScreen,
     }
 \urlstyle{same}
+
+\newenvironment{code}{\captionsetup{type=listing}\singlespacing}{}
+\SetupFloatingEnvironment{listing}{name=Source Code}
 
 \input{bob_macros.tex}
 
