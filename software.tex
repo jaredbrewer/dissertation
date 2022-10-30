@@ -12,7 +12,36 @@ All of the scripts in their latest versions will be able to be found in perpetui
 
 \section{FIJI/ImageJ}\label{fiji}
 
+ImageJ was first developed in embryo in the 1980s as a means of viewing scientific images on the Mac, but matured into the program we know today in the 1990s when it was ported to Java. The original ImageJ1 is still developed and maintained today and serves as the foundation of its functional successor, FIJI. \underline{F}iji \underline{I}s \underline{J}ust \underline{I}mageJ is essentially ImageJ2 bundled with a set of useful plugins that aid in visualizing and analyzing scientific imaging data. Preeminent among these bundled plugins is a library of programming languages that can be used to interface with the underlying Java-based APIs that make FIJI function. Among the options, Python is likely the most widely known and written programming language among biologists and this opens up a great deal of potential for object-oriented programming centered on the analysis of images. 
 
+The default language in ImageJ, the ImageJ1 Macro language (.ijm), is approximately based around Java but lacks defined sets of methods (for most purposes) and objectification, has difficulty with interfacing with file systems, and exposes a great deal of underlying computer logic to the user. Take, for instance, the procedure for writing a \textit{for} loop:
+
+\begin{code}
+\begin{minted}{java}
+for (i = 0; i < 10; i++) {
+    print("Hello");
+}
+\end{minted}
+\end{code}
+
+\begin{code}
+\begin{minted}{python}
+for i in range(1:10):
+    print("Hello")
+\end{minted}
+\end{code}
+
+In the former example, written in the IJ1 macro language, exposes the user to looping over a set of indices from 0 to 10 and incrementing with each loop, uses curly braces to define the boundaries of the loop block, and requires each line to end with a semicolon. These are all standards features of many popular programming languages, but for FIJI, the key is to be as legible of a programming language as possible since the writers of most of these macros are \textit{not} software engineers. Python, by contrast, increments for the user and will increment through an entire set of objects without needing to know how many objects are present. Blocks of code are delimited by spaces or tabs, so the relative location of the code on the line is informative as to what it relates to. Additionally, Python has well-studied and well-defined object types with specific associated methods that translate between all versions of Python. 
+ 
+\section{Python}\label{python}
+
+As alluded to, Python is a dynamically typed high-level programming language that is widely used for generating automation scripts of all varieties in addition to web server backend applications, data science, and even game creation. The advantages of Python are derived from the enormous community of developers who use Python and who continue to develop it as a language. In data science, the utility of pandas and numpy are unmatched and these alone make Python a language worth learning for any molecular biologist in the analysis of their quantitative data. Throughout this work, I have used Python both within the FIJI/ImageJ interpreter (which is based on Jython version 2.7.2) and via CPython 3.10, the standard distribution of Python, in the Terminal. While Jython is nominally different from standard Python, when written appropriately, it is simple enough to write version-universal code within the narrow confines of what I have sought to accomplish thus far with it.
+
+One of the key developments in the field of FIJI and Python is the release of PyImageJ, a complete API interface between CPython and ImageJ2, written in Python \citep{Rueden2022}. Going forward, it will be useful to reimagine some of these scripts and approaches to utilize the PyImageJ-defined API, as this is clearly the future of scripting in FIJI. Unfortunately, such a translation is nontrivial as the command structure and imports have changed quite dramatically and in ways that are not as well documented as the base API. However, such an implementation allows FIJI/ImageJ to make use of pandas, numpy, and OpenCV in Python, making for a more complete data science package and streamlining data collection and processing in a single language. 
+
+\subsection{Napari}
+
+While FIJI/ImageJ have served as the key to the analyses presented both here and in \autoref{chap3}, it is not the only image analysis software available. An alternative, written in pure Python, is napari, which is in the middle stages of alpha testing as of this writing. While not yet feature complete, it is a lightweight alternative to FIJI and, with proper optimization, can likely outperform FIJI in the long run. By shedding dependence on Java, memory management and performance are able to be improved while the lowest-level image processing can be done in C. At the present time, however, FIJI seems to be the most robust and widely accepted option and will likely remain so for the conceivable future.
 
 \section{Maximum-Intensity Projection and Composite Image Generation}
 
@@ -24,7 +53,7 @@ The maximum intensity projection is an extremely common way of condensing multid
 \caption{This script allows the user to open as many files as their memory allotment will allow and then to Z project them one at a time with custom start and end positions. This ability often generates cleaner, sharper images by individually selecting the lowest and highest in-focus frames, but necessarily takes more time than a more automated approach.}
 \label{slowmanmip}
 
-\inputminted[breaklines,frame=single]{python}{source/manMIPper.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/manMIPper.py}
 
 \end{code}
 
@@ -34,7 +63,7 @@ The use of \autoref{slowmanmip} is to process a set of already opened images and
 \caption{A low overhead version of the manual maximum intensity projection script described above. Instead of opening all of the images first and then running the script, the script will processively open unanalyzed images one at a time and periodically garbage collect, allowing for entire directories to be processed at once on most reasonably modern computers.}
 \label{fastmanmip}
 
-\inputminted[breaklines,frame=single]{python}{source/fast_manMIPper.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/fast_manMIPper.py}
 
 \end{code}
 
@@ -44,7 +73,7 @@ The use of \autoref{slowmanmip} is to process a set of already opened images and
 \caption{This script can be used in instances where the first and last stacks of a desired Z projection span the entire set of stacks provided. It will process an entire directory of images together and output the result into a subdirectory of the original.}
 \label{bulkmip}
 
-\inputminted[breaklines,frame=single]{python}{source/bulkMIPper.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/bulkMIPper.py}
 
 \end{code}
 
@@ -54,7 +83,7 @@ While the previous scripts have expected user input for each image, the skilled 
 \caption{An interface to functions allowing slices in a Z-stack to be kept or removed as desired through function calls. This can integrate into other workflows and be connected to the previous scripts through higher-order wrappers.}
 \label{reslicer}
 
-\inputminted[breaklines,frame=single]{python}{source/reSlicer.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/reSlicer.py}
 
 \end{code}
 
@@ -62,56 +91,113 @@ FIJI/ImageJ comes with a built-in option to keep and remove particular slices, b
 
 \section[Surface Plot Analysis for Cellular Distribution of Labeled Proteins]{Surface Plot Analysis for Cellular Distribution of Labeled Proteins\footnote{Taken from personal contributions to \citet{Saelens2022}.}}
 
+The distribution of a protein across the cell body can indicate changes in function of the protein and alterations in cell behavior, but analysis of such changes is not quite trivial. There are methods for drawing lines and plotting fluorescence intensity, but this fails to integrate the entire cell in three dimensions in to the analysis as it proves to be only one dimensional along that line. To analyze the distribution of ARPC2 in BLaER1 macrophages during \textit{M. tuberculosis} infection, I developed a novel analysis pipeline that integrated the 3D Surface Plot plugin of ImageJ. This pipeline takes a raw image, isolates the desired channel, opens it in 3D Surface Plot for visualization, and then takes the user-generated output of 3D Surface Plot to find the maximum fluorescence along the longest axis of the cell. As this analysis is designed for macrophages, which can develop long spindles, this allows for quantitative proximal/distal differences in the localization of a protein to be determined.
+
+\begin{code}
+\caption{A script to isolate a single cell within a frame.}
+\label{isolator}
+
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/autoIsolator.py}
+
+\end{code}
+
+The first step of this pipeline is to isolate the cell using some reference channel, which can also be the channel you are measuring if necessary, although I would recommend using some sort of pan-cytosolic or plasma membrane marker to more thoroughly mark the outline of the cell and to use that instead. The script presents a simple GUI and allows the user to select the needed parameters and will then process entire folders of images into isolated cells in a single channel. A missing feature is that it needs to be able to isolate each cell from images that contain more than one cell, to save the user time on isolating cells in their own separate files by hand. This could conceivably be done by integrating logic around coping ROI contents into new images, but that is a work-in-progress at this time.
+
+The output is a folder of single-channel files ready to be input into 3D Surface Plot, which can be launched with the following:
+
+\begin{code}
+\begin{minted}{python}
+from ij import IJ, ImagePlus
+
+imp = IJ.getImage()
+
+IJ.run(imp, "3D Surface Plot", 
+    '''plotType=1 
+    colorType=3 
+    drawAxes=0 
+    drawLines=0 
+    drawText=0 
+    grid=256 
+    drawLegend=0 
+    smooth=8.5 
+    backgroundColor=000000 
+    windowHeight=600 
+    windowWidth=720''')
+\end{minted}
+\end{code}
+
+The image then needs to be rotated until it is along its longest axis in XY and then oriented precisely perpendicular in XZ (this can be done by turning the axes back on temporarily, although they must be turned off before the next step). This will give the longest two dimensional axis of the image and show a series of peaks and valleys corresponding to a smoothed-over rendition of the image. This can then be exported and, if desired, saved using:
+
+\begin{code}
+\begin{minted}{python}
+from ij import IJ, ImagePlus
+from os import path
+
+outputdir = "" # Insert save directory as a string.
+imp = IJ.getImage()
+title = imp.getTitle()
+
+out = path.join(outputdir, title)
+IJ.saveAs(imp, "Tiff", out)
+\end{minted}
+\end{code}
+
+I recommend saving them for reference later, as the quantitation can occasionally be bugged by strange smoothing, etc. Any outliers will need to be inspected by hand and saving the intermediates can help a great deal with that. Additionally, saving allows further automation in the next step (although, as we will see, automating across all open images is also now possible and will be built into these options in the future).
+
+\begin{code}
+\caption{A script to automatically capture the signal at each point along an image and save it to a CSV file.}
+\label{surfaceplot}
+
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/autoSurfacePlotMeasure.py}
+
+\end{code}
+
+This script is key to capturing the points along the abstracted profile of the cell. It is relatively simple in that it just writes to a CSV each XY coordinate where there is a signal, which can then be condensed by finding the maximum point at each X position in R, which is the final step in the analysis.
+
 \begin{code}
 \caption{A script to conduct computational filename blinding from the command line written in Python.}
 \label{blinder}
 
-\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{r}{source/surface_plot_analysis.R}
 
 \end{code}
 
-\begin{code}
-\caption{A script to conduct computational filename blinding from the command line written in Python.}
-\label{blinder}
-
-\inputminted[breaklines,frame=single]{python}{source/renamer.py}
-
-\end{code}
-
-\begin{code}
-\caption{A script to conduct computational filename blinding from the command line written in Python.}
-\label{blinder}
-
-\inputminted[breaklines,frame=single]{python}{source/renamer.py}
-
-\end{code}
-
+This R script takes the CSV format output from FIJI/ImageJ and processes it by finding the maximum value along the curve and using that as the peak relative fluorescence intensity for that X position and then calculates the area under the curve across a defined interval. For instance, the middle 50\% of the cell can be defined as "central" and the outer 25\% can be defined is "distal" and these values normalized to one another and then compared across different experimental groups. It was found that BLaER1 cells infected with \textit{M. tuberculosis} expressing ancestral \textit{esxM} had less distal localization of ARPC2, suggesting that this bacterial effector was altering actin dynamics in these cells.
 
 \section{py-LaRoMe}\label{larome}
+
+The original purpose of LaRoMe (\href{https://github.com/BIOP/ijp-LaRoMe}) is to extract various features from images and is distributed as an ImageJ plugin. However, like many FIJI/ImageJ plugins, the design of LaRoMe is purely operational. In my attempts to utilize CellProfiler \citep{Carpenter2006, Kamentsky2011, McQuin2018, Stirling2021} to automate capture of various details about the THP-1 macrophages from \autoref{thp1inca, thp1lenti}, I wished to incorporate LaRoMe into Python pipelines to increase my throughput of analysis. This, however proved challenging based on the original design of the plugins, as they did not accept an image as an argument and expected to use the currently active image window.
+
+I therefore completely rewrote these plugins explicitly so that they would accept an image as the primary argument, which allows for easy integration into looping structures. In the process, the entire plugin was translated from Java to Python. It is hoped that in the future, these code bases can be reconciled so that the existing distribution of LaRoMe, managed by BIOP, can incorporate both the excellent GUI options already existing and allow for interfacing through scripts for high-throughput applications.
 
 \begin{code}
 \caption{A Python translation of the FIJI function ``Label image to ROIs'' from LaRoMe. This function allows the user to take images generated from CellProfiler and convert them into a set of regions of interest in the ROI Manager.}
 \label{l2r}
 
-\inputminted[breaklines,frame=single]{python}{source/labelsToROIs.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/labelsToROIs.py}
 
 \end{code}
+
+
 
 \begin{code}
 \caption{A Python translation of the FIJI function ``ROIs to label image'' from LaRoMe. This allows the user to use a set of ROIs to regenerate a label image, useful for creating masks on existing images and comparing areas between different channels.}
 \label{r2l}
 
-\inputminted[breaklines,frame=single]{python}{source/ROIsTolabels.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/ROIsTolabels.py}
 
 \end{code}
+
+
 
 \begin{code}
 \caption{A Python translation of the FIJI function ``ROIs to Measurement Image''. This combines the a defined set of ROIs (probably from labelsToROIs.py) and a raw image and generates an image that graphically represents measurements such as area or circularity.}
 \label{r2m}
 
-\inputminted[breaklines,frame=single]{python}{source/ROIsToMap}
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/ROIsToMap.py}
 
 \end{code}
+
 
 
 \section[Experimental Blinding via a Single-Click Command Line Interface]{Experimental Blinding via a Single-Click Command Line Interface\footnote{Implementation from \citet{Brewer2022}, original conception from \citet{Salter2016}.}}\label{blinders}
@@ -120,9 +206,31 @@ FIJI/ImageJ comes with a built-in option to keep and remove particular slices, b
 \caption{A script to conduct computational filename blinding from the command line written in Python.}
 \label{blinder}
 
-\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/renamer.py}
 
 \end{code}
+
+In the process of data collection (especially image acquisition), the experimenter will typically assign each file a logical name indicative of what it contains. However, these file names are also a critical breakdown in analytical blinding and ways to avoid this are essential to prevent the introduction of excess experimenter bias into the process of analysis. This problem is clearly widespread, but solutions are difficult to come by. Individuals can have labmates or others to rename folders or files to obfuscate their contents, but this has the danger of the human element -- it would not be that difficult to lose track of any alterations and make subsequent quantitation worthless. Thus, a computationally robust method is required. 
+
+\citet{Salter2016} saw this issue and elegantly addressed it through a Perl \citep{Wall2000}. The author generated a script that would allow you to provide a single argument -- a folder -- and have the contents renamed and output a keyfile. This implementation was excellent and used throughout my work, but as time passed, I found it lacking in two major areas: recursion and the ability to undo the renaming. I thus generated a Python implementation that was able to (optionally) recursively move through subdirectories, would provide the exact file path as the original name of the file (useful for feeding into R or FIJI), and came with the ability to provide a folder and keyfile and name all the files back to the original name. In my opinion, these features make for a more complete blinding solution and will hopefully be adopted more widely by users looking to reduce their experimental bias.
+
+This script can be used by first making it executable:
+
+\begin{code}
+\begin{minted}{bash}
+chmod +x ./renamer.py
+\end{minted}
+\end{code}
+
+And then calling it by:
+
+\begin{code}
+\begin{minted}{bash}
+./renamer.py [function] [file directory to rename] [--r]
+\end{minted}
+\end{code}
+
+Where the "--r" argument is either left absent (for no recursion) or is provided "\hyp{}\hyp{}r" for folder recursion through all non-hidden subdirectories. False is the default for safety. This is a reasonable user-friendly option via the command line is should make experimental blinding much easier. The function is either "blindrename" or "unblind" and the directory can be provided as a naked string (that is, no ``'' required).
 
 \section[User-Friendly Analysis of RNA Sequencing Data using Kallisto/Sleuth in a Python Environment]{User-Friendly Analysis of RNA Sequencing Data using Kallisto/Sleuth in a Python Environment\footnote{Taken and expanded from personal contributions to \citet{Saelens2022}.}}\label{rnaseq}
 
@@ -130,31 +238,29 @@ While an old technology today, the analysis of RNA sequencing data still unfairl
 
 Conducting this portion of the work required acquainting myself with a number of commonly used computational tools, including cmake and a deeper knowledge of Python and how that can translate into generating a broadly useful cross-platform tool to analyze complex sequencing data. Doing so also required interfacing with FTP and other networking functions and navigating server directories to fetch reference cDNA from Ensembl.
 
-While these were originally implemented as two parallel scripts, one for bacteria and the other for eukaryotes, they have since been consolidated into a single all-purpose script that requests different input based on what is available. The issue with bacterial analysis is that Ensembl has discontinued generating bioMarts for bacterial genomes and has adopted an unpredictable folder structure for fetching these files via FTP. Thus, the user will have to provide the reference transcriptome of their bacterial strain of choice, which can generally be acquired from species-specific databases (Mycobrowser being the notable one here) or from the set of available strains on NCBI or Ensembl. 
+While these were originally implemented as two parallel scripts, one for bacteria and the other for eukaryotes, they have since been consolidated into a single all-purpose script that requests different input based on what is available. The issue with bacterial analysis is that Ensembl has discontinued generating bioMarts for bacterial genomes and has adopted an unpredictable folder structure for fetching these files via FTP. Thus, the user will have to provide the reference transcriptome of their bacterial strain of choice, which can generally be acquired from species-specific databases (Mycobrowser being the notable one here) or from the set of available strains on NCBI or Ensembl. Nonetheless, this should offer a guided experience to the analysis of RNA sequencing data and provide output that can then be analyzed using either DESeq2 or Sleuth.
 
 \begin{code}
-\caption{A script to conduct computational filename blinding from the command line written in Python.}
+\caption{A guided command line application for the analysis of bulk RNA-seq data using Kallisto.}
 \label{blinder}
 
-\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/allKallisto.py}
 
 \end{code}
 
+This script automates many of the most confusing steps for end users by providing an FTP backend to, whenever possible, fetch the needed files aside from the .FASTQ files from the sequencer. Additionally, the use of Kallisto over more traditional alignment methods like STAR or Bowtie allows this to be trivially run on any modern computer without requiring the user to interface with a computing cluster, which is a relatively steep learning curve for many. Kallisto has other advantages as it is much faster and also more accurate than other alignment methods thanks to its pseudoalignment strategy versus more traditional, computationally intensive find-and-match approaches. Kallisto is also robust to unprocessed .FASTQ files, allowing the user to, in many cases, skip adapter trimming and other preprocessing steps. While there is still a place for STAR and HISAT alignments for \textit{de novo} transcript discovery, in most instances, Kallisto will suffice for the task. 
+
 \begin{code}
-\caption{A script to conduct computational filename blinding from the command line written in Python.}
+\caption{Pipeline for the visualization of Kallisto-aligned RNA seq data using Sleuth. This version supports both eukaryotes and bacteria, albeit through two distinct methods of gathering gene lists.}
 \label{blinder}
 
-\inputminted[breaklines,frame=single]{python}{source/renamer.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{r}{source/sleuther.R}
 
 \end{code}
 
-\begin{code}
-\caption{A script to conduct computational filename blinding from the command line written in Python.}
-\label{blinder}
+Due to policy changes by Ensembl, retrieving pre-packaged marts for bacterial genomes is now impossible on the grounds that the number of bacterial strains has outgrowth Ensembl's ability to provide these marts. Despite the difficulties this creates for finding reference gene lists for even the most common bacterial species (including even \textit{Escherichia coli}), this can be subverted by converting gene lists available from species-specific repositories into a mart-like object that can then be utilized for the downstream steps. No user wants to look at a list of Ensembl IDs after quantitation, and so provision of common gene names is an important component of any analysis. This analysis pipeline was generates specifically for \textit{Mycobacterium tuberculosis}, but could easily be modified to support almost any species.
 
-\inputminted[breaklines,frame=single]{python}{source/renamer.py}
-
-\end{code}
+The logic for fetching and processing bioMarts remains in the script, for use with eukaryotic species. As many of the later steps converge, the user can choose to run particular sets of lines based on their organism. Future versions might wrap some GUI elements or starting booleans to only execute the appropriate commands when needed, but in my experience, it is possible to get a new user working with this script with minimal overall effort.
 
 \section{Bacterial Burden Analysis by Fluorescence Intensity in a Semi-Automated Manner with a User-Friendly Graphical Interface}
 
@@ -164,7 +270,7 @@ One of the major routine tasks in the field of zebrafish-\textit{M. marinum} hos
 \caption{This graphical user interface allows for automatic background subtraction from images of \textit{M. marinum}-infected larval zebrafish and then quantitation of the remaining signal above a manually set threshold that captures as much of the true signal as possible.}
 \label{burden}
 
-\inputminted[breaklines,frame=single]{python}{source/burdenMeasurer.py}
+\inputminted[breaklines,frame=single,fontsize=\small]{python}{source/burdenMeasurer.py}
 
 \end{code}
 
