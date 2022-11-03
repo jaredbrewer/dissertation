@@ -20,6 +20,7 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{makecell}
+\usepackage{ragged2e}
 \renewcommand\theadfont{\bfseries}
 % \renewcommand\theadalign{bc}\usepackage{parskip}
 \usepackage{setspace}
@@ -47,6 +48,11 @@
     pdfpagemode=FullScreen,
     }
 \urlstyle{same}
+
+\hyphenation{macro-phage}
+\hyphenation{macro-phages}
+\hyphenation{temp-era-ture}
+\hyphenation{infl-amma-some}
 
 \newenvironment{code}{\captionsetup{type=listing}\singlespacing}{}
 \SetupFloatingEnvironment{listing}{name=Source Code}
@@ -196,8 +202,12 @@ Lastly, I want to thank my loving partner in this life, Kristen Stockdale, who h
 % \nocite{*}
 % \bibliographystyle{agsm}
 % \printbibliography[heading=bibintoc,title={Bibliography}]
+
+%\begin{FlushLeft}
+\emergencystretch=1em
 \printbibliography[category=cited]
 \printbibliography[title={Cite Me Please},notcategory=cited]
+%\end{FlushLeft}
 
 % \printbibliography[title={Further Reading},notcategory=cited]
 	
