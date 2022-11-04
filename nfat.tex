@@ -1,5 +1,13 @@
 \section{Abstract}
 
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/graphicalabstract.pdf}
+\caption{This is a graphical representation of the work completed here, which found a novel role for NFAT activation downstream of macrophage-mycobacterial surface interactions that facilitated the production and secretion of VEGFA to drive angiogenesis.}
+% Provide a label so we can cross-reference it from the tex
+\label{figure:graphicalabstract}
+\end{figure}
+
 As introduced in the previous chapters, pathogenic mycobacteria manipulate the host immune response to generate a productive infection that enables them to transmit to new hosts. To do so, they must both subvert protective immune responses and agonize the pathways that provide them benefit in the way of nutrients, susceptible host cells, or routes of transmission. This necessitates the engagement of both the immune cells themselves and the surrounding stromal cells, all of which much be subverted to generate the optimal pro-bacterial response. One of the mechanisms by which this can occur is through a specific modification of the specialized cell wall lipid, trehalose 6-6'-dimycolate (TDM). This mycobacterial glycolipid has been found to direct angiogenesis toward nascent granulomas to enhance overall bacterial burden. The present study utilizes the zebrafish-\textit{Mycobacterium marinum} infection model to define the signaling basis of the host angiogenic response. Through intravital imaging and targeted, cell-specific peptide-based inhibition, we identify macrophage-specific activation of NFAT signaling as essential to TDM-mediated angiogenesis in vivo.  Exposure of human cells to \textit{Mycobacterium tuberculosis} results in robust induction of VEGFA that is dependent on a signaling pathway downstream of host TDM detection and culminates in NFATC2 activation. As granuloma-associated angiogenesis is known to serve bacterial-beneficial roles, these findings identify potential host targets to improve tuberculosis disease outcomes.
 
 \section{Introduction}
@@ -154,7 +162,7 @@ To ask more directly whether the decreased angiogenesis observed in the NFAT-def
 \label{figure:vivittdm}
 \end{figure}
 
-\subsection{NFAT Activation is Essential for Angiogenesis in Adult Granulomas}
+\subsection{NFAT Activation is Essential for Angiogenesis in Adult Granulomas}\label{nfatc2aAdult}
 
 \begin{figure}
 \centering
@@ -254,7 +262,6 @@ The zebrafish mycobacterial infection model shares important conserved features 
 \caption{Quantitation of various aspects of the response seen by immunofluorescence after gamma-irradiated \textit{M. tuberculosis}-exposure and INCA-6 treatment. (A) shows the overall percentage of VEGFA+ cells seen in each condition, with a significant increase with $\upgamma$\textit{Mtb} exposure that is inhibited by INCA-6. (B) shows a parallel phenotype, where $\upgamma$\textit{Mtb} induces NFAT nuclear localization that is sensitive to INCA-6 addition. (C) shows the percentage of the total cells in the field of view that demonstrate both NFAT nuclear localization and VEGF expression.}
 % Provide a label so we can cross-reference it from the tex
 \label{figure:incaquant}
-
 \end{figure}
 
 \subsection{Requirement of human NFATC2 for VEGFA induction}\label{thp1lenti}
@@ -327,7 +334,7 @@ hH1 ST & ENSG00000249941 (5) \tabularnewline
 \label{figure:isoformsquant}
 \end{figure}
 
-To test a functional role for human NFATC2 in macrophage induction of VEGFA during $\upgamma$\textit{Mtb} exposure, we used a lentivirus-mediated CRISPR/Cas9 approach to introduce high-efficiency disruption of NFATC2. Using techniques inspired by the zebrafish and backported to cell culture, we simultaneously expressed four distinct guide RNAs targeting NFATC2 or safe-targeting controls, to maximize the percentage of puromycin-resistant cells possessing complete null mutations \citep{Wu2018}. We compared these cells to those transduced with lentiviruses expressing safe-targeting control sgRNAs. (\autoref{figure:targets, table:targets}) \citep{Kabadi2014, Sanjana2014, Morgens2017, Kitamura2021}. Due to technical challenges associated with long-term culture of THP-1 cells and to address heterogeneity among cellular responses, we focused these assays on VEGFA induction in these cells by immunofluorescence after $\upgamma$\textit{Mtb} exposure. Because the N-terminal epitope recognized by our NFATC2 antibody was upstream of the targeted sites, we were unable to examine functional protein levels directly and simultaneously in the immunofluorescence images (\autoref{figure:validation}A). However, we found that transduced cells targeted by NFATC2 lentivirus generally failed to induce VEGFA while safe-targeting control lentivirus-transduced cells responded normally (\autoref{figure:lenti}A-B), an effect that can be quantitated by percentage of VEGFA+ cells (\autoref{figure:lenti}C). These cells also demonstrated evidence of nonsense-mediated decay by NFATC2 transcript levels (\autoref{figure:validation}B). Thus, macrophage NFATC2-mediated induction of VEGFA downstream of mycobacterial TDM exposure is conserved from zebrafish to human cells exposed to \textit{M. tuberculosis}.
+To test a functional role for human NFATC2 in macrophage induction of VEGFA during $\upgamma$\textit{Mtb} exposure, we used a lentivirus-mediated CRISPR/Cas9 approach to introduce high-efficiency disruption of NFATC2. Using techniques inspired by the zebrafish and backported to cell culture, we simultaneously expressed four distinct guide RNAs targeting NFATC2 or safe-targeting controls, to maximize the percentage of puromycin-resistant cells possessing complete null mutations \citep{Wu2018}. We compared these cells to those transduced with lentiviruses expressing safe-targeting control sgRNAs. (\autoref{figure:targets, table:targets}) \citep{Kabadi2014, Sanjana2014, Morgens2017, Kitamura2021}. Due to technical challenges associated with long-term culture of THP-1 cells and to address heterogeneity among cellular responses, we focused these assays on VEGFA induction in these cells by immunofluorescence after $\upgamma$\textit{Mtb} exposure. Because the N-terminal epitope recognized by our NFATC2 antibody was upstream of the targeted sites, we were unable to examine functional protein levels directly and simultaneously in the immunofluorescence images (\autoref{figure:validation}A). However, we found that transduced cells targeted by NFATC2 lentivirus generally failed to induce VEGFA while safe-targeting control lentivirus-transduced cells responded normally (\autoref{figure:lenti}A-B), an effect that can be quantitated by percentage of VEGFA+ cells by multiple metrics (\autoref{figure:lentiIFquant}A-C). These cells also demonstrated evidence of nonsense-mediated decay by NFATC2 transcript levels (\autoref{figure:validation}B). Thus, macrophage NFATC2-mediated induction of VEGFA downstream of mycobacterial TDM exposure is conserved from zebrafish to human cells exposed to \textit{M. tuberculosis}.
 
 \begin{figure}
 \centering
@@ -351,6 +358,14 @@ To test a functional role for human NFATC2 in macrophage induction of VEGFA duri
 \caption{Validation of the lentivirus-mediated knockout approach. (A) shows aberrant localization of NFATC2, suggesting that the remaining protein has been functionally disrupted. Note that the antibody binding site is N-terminal to the sgRNA sites, a technical oversight in this design that made it difficult to quantify reductions in NFATC2 protein levels after targeting. (B) Nonsense-mediated mRNA decay in suspension THP-1 monocytes is reduced by NFATC2 targeting relative to safe targeting controls.}
 % Provide a label so we can cross-reference it from the tex
 \label{figure:validation}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/lentiIFquant.pdf}
+\caption{Blinded quantification of our lentivirus-transduced CRISPR/Cas9 THP-1 macrophages demonstrating a reduction in the degree of VEGFA expression that corresponds to reduced NFATC2 nuclear responsiveness to $\upgamma$\textit{Mtb}. (A) shows the total percentage of VEGFA+ cells out of the total cells present. (B) is the percentage of cells with both VEGFA expression and NFATC2 nuclear translocation out of the total number of cells with NFATC2 nuclear translocation. (C) shows the percentage of the total number of cells that have both VEGFA expression and NFATC2 nuclear translocation. Together these data implicate NFATC2 in mediating the VEGFA response to $\upgamma$\textit{Mtb} exposure.}
+% Provide a label so we can cross-reference it from the tex
+\label{figure:lentiIFquant}
 \end{figure}
 
 \section{Discussion}\label{pap:disc}
