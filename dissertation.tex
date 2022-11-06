@@ -37,6 +37,8 @@
 \usepackage[natbib=true,backend=bibtex,style=authoryear,maxbibnames=99]{biblatex}
 \DeclareBibliographyCategory{cited}
 \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+\AtBeginRefsection{\GenRefcontextData{sorting=ynt}}
+\AtEveryCite{\localrefcontext[sorting=ynt]}
 \addbibresource{lit.bib}
 \nocite{*} 
 
@@ -218,7 +220,7 @@ Lastly, I want to thank my loving partner in this life, Kristen Stockdale, who h
 
 %\begin{FlushLeft}
 \emergencystretch=1em
-\printbibliography[category=cited]
+\printbibliography[category=cited, heading=bibintoc]
 \printbibliography[title={Cite Me Please},notcategory=cited]
 %\end{FlushLeft}
 
