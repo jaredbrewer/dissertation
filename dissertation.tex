@@ -37,8 +37,8 @@
 \usepackage[natbib=true,backend=bibtex,style=authoryear,maxbibnames=99]{biblatex}
 \DeclareBibliographyCategory{cited}
 \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
-\AtBeginRefsection{\GenRefcontextData{sorting=ynt}}
-\AtEveryCite{\localrefcontext[sorting=ynt]}
+%\AtBeginRefsection{\GenRefcontextData{sorting=ynt}}
+%\AtEveryCite{\localrefcontext[sorting=ynt]}
 \addbibresource{lit.bib}
 \nocite{*} 
 
@@ -184,7 +184,9 @@ Lastly, I want to thank my loving partner in this life, Kristen Stockdale, who h
 \input{conclusion.tex}
 \end{doublespace}
 
-\chapter{Appendix A: Reagents Used}\label{reagents}
+\appendix
+
+\chapter{Reagents Used}\label{reagents}
 
 \begin{doublespace}
 \input{appendixA.tex}
@@ -221,7 +223,7 @@ Lastly, I want to thank my loving partner in this life, Kristen Stockdale, who h
 %\begin{FlushLeft}
 \emergencystretch=1em
 \printbibliography[category=cited, heading=bibintoc]
-\printbibliography[title={Cite Me Please},notcategory=cited]
+%\printbibliography[title={Cite Me Please},notcategory=cited]
 %\end{FlushLeft}
 
 % \printbibliography[title={Further Reading},notcategory=cited]
