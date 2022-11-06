@@ -23,6 +23,9 @@
 \usepackage{ragged2e}
 \renewcommand\theadfont{\bfseries}
 % \renewcommand\theadalign{bc}\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xparse}
 \usepackage{setspace}
 \usepackage{changepage}
 \usepackage{listings}
@@ -53,6 +56,18 @@
 \hyphenation{macro-phages}
 \hyphenation{temp-era-ture}
 \hyphenation{infl-amma-some}
+\hyphenation{lymph-angio-gene-sis}
+
+\DeclareDocumentCommand\dia{ o m }{%
+    \begin{enumerate}[%
+        ,label=\IfNoValueTF {#1} {}{#1:}
+        ,labelsep=8mm
+        ,nosep % optional
+        ,font=\color{black}
+        ]
+        \item #2
+    \end{enumerate}%  
+    }
 
 \newenvironment{code}{\captionsetup{type=listing}\singlespacing}{}
 \SetupFloatingEnvironment{listing}{name=Source Code}
