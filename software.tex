@@ -55,7 +55,15 @@ The maximum intensity projection is an extremely common way of condensing multid
 
 \end{code}
 
-The use of \autoref{slowmanmip} is to process a set of already opened images and generate maximum intensity projections from these and, optionally, save them back into the directory that they came from. This relatively simple set of GUI-guided processes allows the user to, in two clicks, accomplish a task that previously would have required a great deal of menuing to accomplish. The goal is narrow, but this execution is extremely useful when working through large numbers of images.
+The use of \autoref{slowmanmip} is to process a set of already opened images and generate maximum intensity projections from these and, optionally, save them back into the directory that they came from. This relatively simple set of GUI-guided processes allows the user to, in two clicks, accomplish a task that previously would have required a great deal of menuing to accomplish. The goal is narrow, but this execution is extremely useful when working through large numbers of images. This is readily adaptable to any workflow as it has no features specific to a given image type or contents, so could easily be reused by many different individuals for their own purposes, like the subsequent scripts to process maximum intensity projections by other modes.
+
+This script will first open a GUI with a simple set of inputs: the minimum and maximum slices that the user would like to use in creating the Z projection. This GUI is a ``non-blocking'' GUI, and can thus be opened in advance of deciding which slices to use -- a convenience that frees the user from having to remember which slices were the best. 
+
+The internal logic of this macro seeks to minimize opportunities for user-derived error by checking whether the values provided are logical. The top slice needs to have a value greater than the bottom slice, but if both are left as the default (0), then it will create a maximum intensity projection across the whole image. This allows it to be a single-click convenience button for performing this operation on any number of images, although other options presented later are likely to be better choices for this. Additionally, if the top value is set to a number greater than the total number of slices, then it provides an error to the user. This adds some safety to the operations and prevents unintended operations, although the risk of data corruption is essentially non-existent. 
+
+This, like many of the scripts further on, incorporates memory management to improve FIJI stability and prevent runaway memory leakage from Java, which very inefficiently clears out unused sectors even when the image has been closed. Thus, approximately one in every eight runs, the macro will run garbage collection to free up memory which can allow for more extended uptime for FIJI in the process of doing numbers of images far in excess of nominal memory space; however, for this, I could recommend looking to \autoref{fastmanmip}, which is written for essentially unlimited images in any reasonable memory buffer capacity.
+
+A future version will incorporate a one-time checkbox that will allow the user to choose whether they would like to automatically reopen the dialog box for each image that they have open currently. If it is selected on the first run, it will then open for every subsequent image until cancelled. This should streamline these processes and further minimize clicks-per-operation, which should be the primary goal of these sorts of automation macros.
 
 \begin{code}
 \caption{A low overhead version of the manual maximum intensity projection script described above. Instead of opening all of the images first and then running the script, the script will processively open unanalyzed images one at a time and periodically garbage collect, allowing for entire directories to be processed at once on most reasonably modern computers.}
@@ -67,6 +75,12 @@ The use of \autoref{slowmanmip} is to process a set of already opened images and
 
 \autoref{fastmanmip}, while not always the correct choice depending on user preferences and system capabilities, is much less memory hungry than the original version above, but typically results in slightly slower overall operations due to the delay in opening images. If the images are on fast internal storage, then this is certain to be faster than \autoref{slowmanmip}, but when reading from external storage, the I/O limitations will likely make it faster to open all of the images prior to processing unless system memory is severely limited. Nevertheless, the nature of this makes it very generally useful on older systems.
 
+The user interface prompts the user to provide a directory that contains all of the desired images and provide the file extension from a pre-populated list or provide their own. These are the only user-inputs required to get this processing started; from there, a dialog box will open after each image has been opened requesting the first and last slices for maximum intensity projection, which can vary from image to image.
+
+The internal logic of this script prevents the user from accidentally processing the same image more than once; this allows the processing to be done in session over time rather than all at once. The script looks for a file with the expected naming structure for the output and, if it is found, removes the original file from the list of inputs. This also hedges against FIJI crashing or other errors. To do an image again due to some user input error, the user can either use \autoref{slowmanmip} or remove the projection from the directory and the script will then allow it to be processed again. 
+
+This script also utilizes an identical memory management approach to the previous, which has allowed this to function over thousands of images at once. This offers a distinct advantage over manual memory management approaches that have to be used during manual processing and the requirement to open all of the images beforehand, a process inherently limited by available system memory.
+
 \begin{code}
 \caption{This script can be used in instances where the first and last stacks of a desired Z projection span the entire set of stacks provided. It will process an entire directory of images together and output the result into a subdirectory of the original.}
 \label{bulkmip}
@@ -77,6 +91,8 @@ The use of \autoref{slowmanmip} is to process a set of already opened images and
 
 While the previous scripts have expected user input for each image, the skilled microscopist can select top and bottom slices that will suffice for generating Z projections during imaging itself. This means that the first and last slices of the projection are typically the first and last slices of the images \textit{in toto}. This script takes a directory of images as an input and will perform total maximum intensity projections on all of them and save in a new subdirectory. After observation, any that seem incorrect can then be processed with one of the preceding scripts, especially \autoref{slowmanmip}. 
 
+The only prompting from the user is to provide a directory and file extension, just like \autoref{fastmanmip}. As a result of the lack of user intervention during processing, the internal logic of this script is much simpler and will simply perform top-to-bottom projections of each of the files in the directory and then save them in a subdirectory of the original directory provided. This operation can easily processing hundreds of images per minute and cuts processing time down dramatically -- whereas it can take 10-15 seconds per image doing it strictly by GUI, it can now do dozens to hundreds of images in that same time period. Not having to physically show the image also improves performance, although the user can opt to have it show the projections if desired by simple modifications to the code. A future version should incorporate an option to turn this on or off within the GUI; it should be reasonable for most computers to be able to show the maximum intensity projections for at least a few hundred images, although selecting such an option will come with some performance penalty.
+
 \begin{code}
 \caption{An interface to functions allowing slices in a Z-stack to be kept or removed as desired through function calls. This can integrate into other workflows and be connected to the previous scripts through higher-order wrappers.}
 \label{reslicer}
@@ -85,7 +101,9 @@ While the previous scripts have expected user input for each image, the skilled 
 
 \end{code}
 
-FIJI/ImageJ comes with a built-in option to keep and remove particular slices, but the native plugin does not readily fit into object-oriented programming pipelines like those used by Python and Java. Thus, I have adapted the underlying logic of these plugins to be wrapped in various other scripts through calls to the defined functions, \textit{sliceKeeper} and \textit{sliceRemover}. For instance, this allows calls to the maximum intensity projection plugins to be funneled into this plugin to simultaneously generate the kept slices as well as the maximum intensity projection of those kept slices for some useful improvements to data integrity. 
+FIJI/ImageJ comes with a built-in option to keep and remove particular slices (Image $>$ Stacks $>$ Tools $>$ Slice Keeper / Slice Remover), but the native plugin does not readily fit into object-oriented programming pipelines like those used by Python and Java; it is very operational toward the currently open image and does not have a well-defined API. Thus, I have adapted the underlying logic of these plugins to be wrapped in various other scripts through calls to the defined functions, \textit{sliceKeeper} and \textit{sliceRemover}. For instance, this allows calls to the maximum intensity projection plugins to be funneled into this plugin to simultaneously generate the kept slices as well as the maximum intensity projection of those kept slices for some useful improvements to data integrity. 
+
+Integration of this as in import into the other scripts previously described with an additional option would be an intelligent way of making use of this plugin; it also reveals the many opportunities to expand upon and add functionality to the previously detailed plugins based on user needs. The addition of saving the exact slices used to generate maximum intensity projections along with some sort of metadata seems like it would improve data integrity in a meaningful way, although at the cost of increased storage requirements.
 
 \section[Surface Plot Analysis for Cellular Distribution of Labeled Proteins]{Surface Plot Analysis for Cellular Distribution of Labeled Proteins\footnote{Taken from personal contributions to \citet{Saelens2022}.}}
 
@@ -153,14 +171,14 @@ I recommend saving them for reference later, as the quantitation can occasionall
 This script is key to capturing the points along the abstracted profile of the cell. It is relatively simple in that it just writes to a CSV each XY coordinate where there is a signal, which can then be condensed by finding the maximum point at each X position in R, which is the final step in the analysis.
 
 \begin{code}
-\caption{A script to conduct computational filename blinding from the command line written in Python.}
+\caption{An R script to capture the maximum point along the profile generated by the previous scripts and then calculate the area under the curve to compare different biological groups to one another.}
 \label{blinder}
 
 \inputminted[breaklines,frame=single,fontsize=\small]{r}{source/surface_plot_analysis.R}
 
 \end{code}
 
-This R script takes the CSV format output from FIJI/ImageJ and processes it by finding the maximum value along the curve and using that as the peak relative fluorescence intensity for that X position and then calculates the area under the curve across a defined interval. For instance, the middle 50\% of the cell can be defined as "central" and the outer 25\% can be defined is "distal" and these values normalized to one another and then compared across different experimental groups. It was found that BLaER1 cells infected with \textit{M. tuberculosis} expressing ancestral \textit{esxM} had less distal localization of ARPC2, suggesting that this bacterial effector was altering actin dynamics in these cells.
+This R script takes the CSV format output from FIJI/ImageJ and processes it by finding the maximum value along the curve and using that as the peak relative fluorescence intensity for that X position and then calculates the area under the curve across a defined interval. For instance, the middle 50\% of the cell can be defined as "central" and the outer 25\% can be defined is "distal" and these values normalized to one another and then compared across different experimental groups. It was found that BLaER1 cells infected with \textit{M. tuberculosis} expressing ancestral \textit{esxM} had less distal localization of ARPC2, suggesting that this bacterial effector was altering actin dynamics in these cells via modulation of ARPC2, a finding consistent with previous observations of macrophage from \textit{Arpc2\textsuperscript{-/-}} mice \citep{Rotty2017}.
 
 \section{py-LaRoMe}\label{larome}
 
@@ -176,7 +194,7 @@ I therefore completely rewrote these plugins explicitly so that they would accep
 
 \end{code}
 
-
+\autoref{l2r} allows the user to convert a labeled set of images, for instanced from CellProfiler \citep{Carpenter2006, Kamentsky2011, Stirling2021, McQuin2018} into a set of discrete regions of interest in the ROI Manager within FIJI. This allows for interesting layers of quantitation and segmentation that are otherwise difficult to perform within FIJI due to its difficulty in understanding the RGB layering in the TIFF files produced by CellProfiler. While this work ultimately did not bear much fruit, these approaches seem like they could be broadly useful for others in the future who are trying to do high-throughput, high-content data extraction from labeled images within a larger pipeline. The original implementation is more user-friendly in many ways, but this implementation is, in my opinion, more flexible and with an easier to understand API.
 
 \begin{code}
 \caption{A Python translation of the FIJI function ``ROIs to label image'' from LaRoMe. This allows the user to use a set of ROIs to regenerate a label image, useful for creating masks on existing images and comparing areas between different channels.}
@@ -186,7 +204,7 @@ I therefore completely rewrote these plugins explicitly so that they would accep
 
 \end{code}
 
-
+\autoref{r2l} essentially performs the opposite operation to that performed by \autoref{l2r}. It can use a list of ROIs to generate a new image containing all of the uniquely labeled points and determines the bit-depth of the image based on the number of unique points required. This can be useful in the process of translating multiple labeled images onto one another as well as in integrating labels from multiple processing modalities.
 
 \begin{code}
 \caption{A Python translation of the FIJI function ``ROIs to Measurement Image''. This combines the a defined set of ROIs (probably from labelsToROIs.py) and a raw image and generates an image that graphically represents measurements such as area or circularity.}
@@ -196,7 +214,9 @@ I therefore completely rewrote these plugins explicitly so that they would accep
 
 \end{code}
 
+The last function in the original LaRoMe transforms a set of ROIs into an image that graphically represents various qualities of the source image. This allows the user to transform a more basic segmented image into ROIs and then use those to measure various aspects of the image from which the ROIs were sourced; this recombines the data from labeled images with the primary data from which it was sourced to generate useful measurements, including the area of fluorescence within the ROI, the relative circularity, the minimum or maximum fluorescence intensity, and more. This utility warrants further exploration going forward in attempting to quantify major aspects of tissue culture immunofluorescence imaging; a more optimized pipeline could likely extract more useful data from the images I already have of various correspondences between NFAT nuclear localization and VEGFA production.
 
+The rewrite allows all of these commands to be strung together to process arbitrary numbers of images all at once and, with intelligent file naming, it should be possible to go from CellProfiler-derived label images to meaningful quantitation of various aspects of the raw images across entire directories of image sets. ``ROIs to Measurement Image'' should probably have an optional GUI similar to the original wrapped around its commands, but I would refer those interested to simply use the original LaRoMe as this implementation and the original are at feature parity.
 
 \section[Experimental Blinding via a Single-Click Command Line Interface]{Experimental Blinding via a Single-Click Command Line Interface\footnote{Implementation from \citet{Brewer2022}, original conception from \citet{Salter2016}.}}\label{blinders}
 
@@ -228,9 +248,11 @@ And then calling it by:
 \end{minted}
 \end{code}
 
-Where the "--r" argument is either left absent (for no recursion) or is provided "\hyp{}\hyp{}r" for folder recursion through all non-hidden subdirectories. False is the default for safety. This is a reasonable user-friendly option via the command line is should make experimental blinding much easier. The function is either ``blindrename'' or ``unblind'' and the directory can be provided as a naked string (that is, no ``'' required).
+Where the "--r" argument is either left absent (for no recursion) or is provided "\hyp{}\hyp{}r" for folder recursion through all non-hidden subdirectories. False is the default for safety. This is a reasonably user-friendly option via the command line is should make experimental blinding much easier. The function is either ``blindrename'' or ``unblind'' and the directory can be provided as a naked string (that is, no ``'' required).
 
-\section[User-Friendly Analysis of RNA Sequencing Data using Kallisto/Sleuth in a Python Environment]{User-Friendly Analysis of RNA Sequencing Data using Kallisto/Sleuth in a Python Environment\footnote{Taken and expanded from personal contributions to \citet{Saelens2022}.}}\label{rnaseq}
+Being written in Python, a GUI could probably be created that would allow this to be even more friendly to the technologically na\"{i}ve user. This would be a relatively modest undertaking and is probably worth considering in the future; this would also allow for more effective cross-platform distribution as compiled binaries.
+
+\section[User-Friendly Analysis of RNA Sequencing Data using Kallisto/Sleuth in a Python Environment]{User-Friendly Analysis of RNA Sequencing Data using Kallisto/Sleuth in a Python Environment\footnote{Taken and expanded from personal contributions to \fullcite{Saelens2022}.}}\label{rnaseq}
 
 While an old technology today, the analysis of RNA sequencing data still unfairly remains a challenge for the technologically na\"{i}ve researcher. To ameliorate part of this problem, in the course of the work in \citet{Saelens2022}, I developed a set of pipelines for the analysis of RNAseq data using a combination of Kallisto and Sleuth, a pair of analysis and visualization applications that utilize pseudoalignment to calculate read counts and then display them in a Shiny application via R \citep{Pimentel2017}.
 
