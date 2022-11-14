@@ -113,6 +113,14 @@ The larval zebrafish, on account of the high fecundity of the model, is a key to
 
 For ease of manipulation and the minimization of distress, larval zebrafish are anesthetized in approximately 160 $\upmu$g/mL of tricaine (MS-222 or Tricaine-S\footnote{Now known as ``Syncaine''}, Syndel \#ANADA 200-226) prior to injection. Injection of \textit{M. marinum} is done by injecting larvae into a developmentally undefined peri-notochordal space between the somitic muscle layers along the trunk at 2 days post fertilization. Approximately 50-150 fluorescent bacteria are injected, spreading allong the anterior-posterior length of the fish and establishing a largely localized infection along the avascular trunk. This infection location allows for facile quantitation of vascular aberrations, an essential prerequisite for this study. Injection of TDM is conducted similary. Trehalose 6-6'-dimycolate from \textit{Mycobacterium bovis} (TDM, Sigma-Aldrich \#T3034) was resuspended in 2:1 v/v chloroform:methanol at 1 mg/mL and stored at -80$^{\circ}$C. Prior to use, the liquid is evaporated under vacuum and emulsified in incomplete Freund's adjuvant (IFA, Sigma-Aldrich \#F5506) at 2 mg/mL. Larvae are then anesthetized and injected with approximately 10-20 nL of TDM/IFA or IFA alone along the trunk in this same undefined peri-notochordal space. The droplets coalesce into spheres within 10-15 minutes and remain in place for the entire experimental duration. Larvae are allowed to recover in E3 medium supplemented with PTU and raised in a 28.5$^{\circ}$C incubator.
 
+\begin{code}
+\caption{This is a reference model for the analysis used to evaluate differences in angiogenesis across different genetic and treatment groups. In all instances, raw vascular measurements from FIJI/ImageJ are imported, paired with a key file (either genotype or file name depending on blinding strategy), and then plotted with ggplot.}
+\label{zebrafishanalysis}
+
+\inputminted[breaklines,frame=single,fontsize=\small]{r}{source/cfu_plot_example.R}
+
+\end{code}
+
 \subsection{Deficits of Mouse Models of Tuberculosis}\label{mouse}
 
 One model in particular, the C57BL/6 \textit{Mus musculus} mouse model, has become a ubiquitous feature of every major research institution all over the world due to their clonal nature\footnote{Genetic diversity between individual C57BL/6 mice is in the range of 10-20 single nucleotide polymorphisms per individual in a genome of 2.5 gigabases - a remarkable degree of isogenicity \citep{Bryant2011, Sarsani2019}.}, relative ease of use, and minimal expense\footnote{A single C57BL/6 mouse from Jackson Laboratories (jax.org) at the time of writing is \$24 USD.}. However, their genetic homogeneity fails to reproduce many phenotypes seen in human disease, making them an excellent model for some disorders and an insufficient one for others. Such loss of heterozygosity far from models the human condition, where there are an estimated 20 million base pairs of difference from person to person \citep{Genomes2015}. The difficulties of the mouse model are nowhere more apparent than in developmental biology. Although mouse viviparous development is extremely well defined and stereotyped over the course of gestation, that is precisely the challenge. Gestation is an internal and ongoing process of physiological and anatomical development and while it is possible to catalog the process of development in snapshots in time through vivisection, it is impossible to understand the kinetics and processes of development using a model that does not allow for immediate visual accessibility. While mice faithfully recapitulate certain aspects of human development, it is far from perfect and other approaches are able to access different types of knowledge in greater detail.
@@ -211,6 +219,14 @@ Single cell preparations of these bacteria were prepared and stored as single-us
 
 Colony forming unit assays were conducted by complete homogenization of whole adult zebrafish after euthanasia by tricaine overdose and external cleansing of the skin using 70\% ethanol. A single 6.5 mm ceramic bead (Omni \#19-682) was added to in a pre-filled bead mill tube containing 2.8 mm stainless steel beads (Sigma-Aldrich \#Z763829-50EA) and then the fish was homogenized on a bead mill (MP Bio \#116004500) for a single 25 second interval at 5 meters/second. Lysate was plated on 7H10 plates supplemented with 10\% OADC,  hygromycin B (50 $\upmu$g/mL), amphotericin B (Gibco \#15290-026) (10 $\upmu$g/mL), and polymyxin B (Cayman Chemical \#14157) (25 $\upmu$g/mL). Lysate was plated in serial 1:10 dilutions up to 10\textsuperscript{-5}. Cultures were grown for 10-14 days prior to counting visible colonies. Where possible (due to contamination inherent to the assay), confirmatory counting was performed at 21 days after plating to capture slow-growing colonies, which are quite rare in our hands. Plates displaying overt contamination that occluded colony growth were excluded from further analysis.
 
+\begin{code}
+\caption{This code displays an example of the code used to generate the plots for CFU quantitation. The CFUs are normalized to the median value of the control group in their respective experiments and then statistically compared by Student`s t test and plotted using ggplot.}
+\label{cfuanalysis}
+
+\inputminted[breaklines,frame=single,fontsize=\small]{r}{source/cfu_plot_example.R}
+
+\end{code}
+
 \section{THP-1 as a Macrophage Model}\label{thp1}
 
 THP-1 (ATCC TIB-202) cells are a human monocytic cell culture line derived from a 1-year-old 46XY patient suffering from acute myelogenous leukemia in 1980 \citep{Tsuchiya1980}. They have become a widespread and useful model to study certain aspects of macrophage biology \textit{in vitro} as they can be differentiated into macrophage-like cells by addition of phorbol 12-myristate-13-acetate (PMA) to the media. This makes them a facile model -- replicating in suspension at baseline, but becoming adherent, non-replicating, and terminally differentiated after treatment with PMA. While they are widely used, they are an imperfect model and cannot model certain aspects of tissue macrophage biology and are only exposed to the defined set of stimuli provided in the media. Additionally, they are variably aneuploid, with reports providing evidence of pseudo-diploid cells up to tetraploidy and beyond \citep{Odero2000, Adati2009, Kasai2022}. Despite these disadvantages, they remain among the most faithful models and typically align well with studies conducted on mouse bone marrow-derived macrophages and human peripheral blood monocyte-derived macrophages, arguably the two best models for macrophage biology \textit{in vitro} \citep{MendozaCoronel2016}. 
@@ -225,6 +241,14 @@ The cells used for these experiments were sourced from the Duke Cell Culture Fac
 
 qRT-PCR is a powerful and highly precise method for quantitating the amount of a transcript present in a sample. This utilizes RNA extraction followed by quantitative reverse transcription to turn the RNA into complementary DNA, which can then be measured by standard PCR amplification in the presence of a dsDNA-binding dye. Under optimal conditions, this reaction proceeds by doubling the amount of product present each cycle, which can then be directly translated into a relative quantity by base 2 transformation relative to a control transcript. These data are then analyzed by the 2\textsuperscript{-$\upDelta\upDelta$C\textsubscript{t}} method, which makes some important but not always valid assumptions about the raw data \citep{Livak2001, Cikos2007}. For instance, this method assumes that the PCR efficiency for all of the primer sets is 100\%, which is not always true. However, this is the gold standard for comparing the relative quantities of a transcript across two samples and also allows for comparisons of the quantities of two or more different transcripts. This method is ubiquitously used for its relative ease and resource economy while remaining highly accurate \citep{Dvinge2009, Perkins2012, Pabinger2014}.
 
+\begin{code}
+\caption{This is a qRT-PCR-specific package-free approach to the analysis of C\textsubscript{t} values from a 7500 Fast qPCR machine. The advantage is that the existing qPCR analysis packages are all, to varying degrees, difficult to use all to perform a relatively simple set of operations. This is also the first example in my code of using for loops to processively create all of the plots needed -- this is a pattern that should be replicated in the future for ease and consistency.}
+\label{qpcranalysis}
+
+\inputminted[breaklines,frame=single,fontsize=\small]{r}{source/qPCR_analysis.R}
+
+\end{code}
+
 \subsubsection{Technical Details}\label{rnaextraction}
 
 THP-1 cells were transdifferentiated into macrophage-like cells using 50 ng/mL PMA (phorbol 12-myristate-13-acetate) (Sigma-Aldrich \#P148), seeded in 24 well cell culture treated plates at a concentration of 5 x 10\textsuperscript{5} cells/ml and incubated at 37$^{\circ}$C/5\%CO\textsubscript{2} for 48hr. After that the PMA media was changed using complete RPMI 1640 media and incubated at 37$^{\circ}$C/5\%CO\textsubscript{2} for 24hr (rest day). Then the cells were exposed to 0.5 mL of gamma-irradiated Mtb (BEI \#NR-49098) in 25\% glycerol (Sigma-Aldrich \#G7757) diluted in RPMI-1640 at a final concentration of 1 mg/mL. Cells were spun at 100 rcf for 5 min and incubated at 37$^{\circ}$C/5\%CO\textsubscript{2} for 8hr.
@@ -236,6 +260,14 @@ cDNA synthesis was performed using the LunaScript RT SuperMix Kit (NEB \#E3010L)
 \subsection{ELISA}\label{elisa}
 
 An enzyme-linked immunosorbent assay (ELISA) is an effective means of quantifying the amount of protein present in a supernatant and is often used to quantify cytokine production in a variety of contexts. For my purposes, I am most interested in the production of VEGFA by THP-1 cells. The sandwich ELISA we use coats the plate with one antibody, which then fixes the protein of interest in place and is then detected by binding of another antibody at another location on the same protein. While these kits are widely manufactured, it is principally possible to use any two well-defined antibodies to measure any protein whose expression might change due to experimentation. These are somewhat targeted by nature, but reward the experimenter with highly quantitative and standardized data able to be converted into the concentration of the protein in the media.
+
+\begin{code}
+\caption{This older code is used to analyze ELISA data from a plate reader. It includes the internal logic to generate a standard curve and then use that standard curve to convert optical density values into a quantitative measurement of the concentration of VEGFA in the supernatant.}
+\label{elisaanalysis}
+
+\inputminted[breaklines,frame=single,fontsize=\small]{r}{source/ELISA_Analysis.R}
+
+\end{code}
 
 \subsubsection{Technical Details}\label{howelisa}
 
@@ -250,6 +282,14 @@ THP-1 cells were plated on 4-well chamber slides (MatTek \#CCS-4) and differenti
 Images shown in the figures were digitally adjusted for brightness and contrast in FIJI/ImageJ \citep{Schindelin2012} and all adjustments were applied uniformly across the images within an experiment. All quantitation was performed based on the unadjusted brightness and contrast values and thresholded to better capture positive signal and eliminate the background fluorescence ubiquitous in these images.
 
 To capture differences in VEGF expression across different experimental conditions, we programmatically blinded a subset of images from each experimental condition using blindrename.pl \citep{Salter2016} and, using the \textit{Cell Counter} plugin in FIJI/ImageJ, we marked each nucleus (as a proxy for cell number), each cell that visually expressed VEGFA at a minimum/maximum bit value of 100/1500, cells that had nuclear translocation of NFATC2, cells at the intersection of these two factors, and, when applicable, Cas9 expression. These values were exported and subsequently processed in R.
+
+\begin{code}
+\caption{This script is used to analyze all of the various immunofluorescence quantitation performed in these studies and includes distinct blocks of code for the inhibitor, isoforms, and lentivirus assays and the data processing used to generate the plots in ggplot.}
+\label{thp1analysis}
+
+\inputminted[breaklines,frame=single,fontsize=\small]{r}{source/THP-1_Processing.R}
+
+\end{code}
 
 Many of the antibodies used in this study were an extremely kind gift from Aviva Symes at the Uniformed Services University. She had kept them in cold storage for greater than 20 years before passing them on to me and they have proven indispensable to many of these studies, allowing us to profile all of the different NFAT isoforms as well as all of them at once using the pan-NFAT antibody, which desperately needs to be recreated, preferably as a monoclonal antibody. This would certainly make studies on NFAT more approachable to many other groups around the world.
 

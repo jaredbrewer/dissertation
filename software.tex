@@ -57,9 +57,17 @@ The maximum intensity projection is an extremely common way of condensing multid
 
 The use of \autoref{slowmanmip} is to process a set of already opened images and generate maximum intensity projections from these and, optionally, save them back into the directory that they came from. This relatively simple set of GUI-guided processes allows the user to, in two clicks, accomplish a task that previously would have required a great deal of menuing to accomplish. The goal is narrow, but this execution is extremely useful when working through large numbers of images. This is readily adaptable to any workflow as it has no features specific to a given image type or contents, so could easily be reused by many different individuals for their own purposes, like the subsequent scripts to process maximum intensity projections by other modes.
 
-This script will first open a GUI with a simple set of inputs: the minimum and maximum slices that the user would like to use in creating the Z projection. This GUI is a ``non-blocking'' GUI, and can thus be opened in advance of deciding which slices to use -- a convenience that frees the user from having to remember which slices were the best. 
+This script will first open a GUI with a simple set of inputs: the minimum and maximum slices that the user would like to use in creating the Z projection. This GUI is a ``non-blocking'' GUI, and can thus be opened in advance of deciding which slices to use -- a convenience that frees the user from having to remember which slices were the best (\autoref{figure:mipgui}). 
 
-The internal logic of this macro seeks to minimize opportunities for user-derived error by checking whether the values provided are logical. The top slice needs to have a value greater than the bottom slice, but if both are left as the default (0), then it will create a maximum intensity projection across the whole image. This allows it to be a single-click convenience button for performing this operation on any number of images, although other options presented later are likely to be better choices for this. Additionally, if the top value is set to a number greater than the total number of slices, then it provides an error to the user. This adds some safety to the operations and prevents unintended operations, although the risk of data corruption is essentially non-existent. 
+\begin{figure}
+\centering
+\includegraphics[height=2in]{images/mipgui.png}
+\caption{This is the entire graphical user interface and inputs required to run this script: the script asks for the top and bottom slices from the image of interest and then runs the rest of the script.}
+% Provide a label so we can cross\hyp{}reference it from the tex
+\label{figure:mipgui}
+\end{figure}
+
+The internal logic of this macro seeks to minimize opportunities for user-derived error by checking whether the values provided are logical. The top slice needs to have a value greater than the bottom slice\footnote{This is not a technical requirement -- indeed, the ZProjector function itself can take these argument in either order, but it seemed to me that if the numbers are put in the wrong order that this suggested a user error in input and was not intended.}, but if both are left as the default (0), then it will create a maximum intensity projection across the whole image. This allows it to be a single-click convenience button for performing this operation on any number of images, although other options presented later are likely to be better choices for this. Additionally, if the top value is set to a number greater than the total number of slices, then it provides an error to the user. This adds some safety to the operations and prevents unintended operations, although the risk of data corruption is essentially non-existent. 
 
 This, like many of the scripts further on, incorporates memory management to improve FIJI stability and prevent runaway memory leakage from Java, which very inefficiently clears out unused sectors even when the image has been closed. Thus, approximately one in every eight runs, the macro will run garbage collection to free up memory which can allow for more extended uptime for FIJI in the process of doing numbers of images far in excess of nominal memory space; however, for this, I could recommend looking to \autoref{fastmanmip}, which is written for essentially unlimited images in any reasonable memory buffer capacity.
 
@@ -75,7 +83,15 @@ A future version will incorporate a one-time checkbox that will allow the user t
 
 \autoref{fastmanmip}, while not always the correct choice depending on user preferences and system capabilities, is much less memory hungry than the original version above, but typically results in slightly slower overall operations due to the delay in opening images. If the images are on fast internal storage, then this is certain to be faster than \autoref{slowmanmip}, but when reading from external storage, the I/O limitations will likely make it faster to open all of the images prior to processing unless system memory is severely limited. Nevertheless, the nature of this makes it very generally useful on older systems.
 
-The user interface prompts the user to provide a directory that contains all of the desired images and provide the file extension from a pre-populated list or provide their own. These are the only user-inputs required to get this processing started; from there, a dialog box will open after each image has been opened requesting the first and last slices for maximum intensity projection, which can vary from image to image.
+The user interface prompts the user to provide a directory that contains all of the desired images and provide the file extension from a pre-populated list or provide their own (\autoref{figure:automipgui}). These are the only user-inputs required to get this processing started; from there, a dialog box will open after each image has been opened requesting the first and last slices for maximum intensity projection, which can vary from image to image.
+
+\begin{figure}
+\centering
+\includegraphics[width=3in]{images/automipgui.png}
+\caption{This GUI pop\hyp{}up asks the user for the file directory that they would like to process and will process only the images directly in that folder; it also asks for the file extension so that it will only process the desired images in case the user has additional data in that folder.}
+% Provide a label so we can cross\hyp{}reference it from the tex
+\label{figure:automipgui}
+\end{figure}
 
 The internal logic of this script prevents the user from accidentally processing the same image more than once; this allows the processing to be done in session over time rather than all at once. The script looks for a file with the expected naming structure for the output and, if it is found, removes the original file from the list of inputs. This also hedges against FIJI crashing or other errors. To do an image again due to some user input error, the user can either use \autoref{slowmanmip} or remove the projection from the directory and the script will then allow it to be processed again. 
 
@@ -117,7 +133,15 @@ The distribution of a protein across the cell body can indicate changes in funct
 
 \end{code}
 
-The first step of this pipeline is to isolate the cell using some reference channel, which can also be the channel you are measuring if necessary, although I would recommend using some sort of pan-cytosolic or plasma membrane marker to more thoroughly mark the outline of the cell and to use that instead. The script presents a simple GUI and allows the user to select the needed parameters and will then process entire folders of images into isolated cells in a single channel. A missing feature is that it needs to be able to isolate each cell from images that contain more than one cell, to save the user time on isolating cells in their own separate files by hand. This could conceivably be done by integrating logic around coping ROI contents into new images, but that is a work-in-progress at this time.
+The first step of this pipeline is to isolate the cell using some reference channel, which can also be the channel you are measuring if necessary, although I would recommend using some sort of pan-cytosolic or plasma membrane marker to more thoroughly mark the outline of the cell and to use that instead. The script presents a simple GUI (\autoref{figure:spgui}) and allows the user to select the needed parameters and will then process entire folders of images into isolated cells in a single channel. A missing feature is that it needs to be able to isolate each cell from images that contain more than one cell, to save the user time on isolating cells in their own separate files by hand. This could conceivably be done by integrating logic around coping ROI contents into new images, but that is a work-in-progress at this time.
+
+\begin{figure}
+\centering
+\includegraphics[width=3in]{images/spgui.png}
+\caption{The user needs to provide a number of factors to allow for this function to operate properly: a file directory with the images that should be processed, the file extension, and a reference channel which should encompass approximately the entire cell, and the measurement channel, which is what the user wishes to actually measure.}
+% Provide a label so we can cross\hyp{}reference it from the tex
+\label{figure:spgui}
+\end{figure}
 
 The output is a folder of single-channel files ready to be input into 3D Surface Plot, which can be launched with the following:
 
@@ -168,7 +192,15 @@ I recommend saving them for reference later, as the quantitation can occasionall
 
 \end{code}
 
-This script is key to capturing the points along the abstracted profile of the cell. It is relatively simple in that it just writes to a CSV each XY coordinate where there is a signal, which can then be condensed by finding the maximum point at each X position in R, which is the final step in the analysis.
+This script is key to capturing the points along the abstracted profile of the cell. It is relatively simple in that it just writes to a CSV each XY coordinate where there is a signal, which can then be condensed by finding the maximum point at each X position in R, which is the final step in the analysis. This script presents a GUI (\autoref{figure:spmeasuregui})
+
+\begin{figure}
+\centering
+\includegraphics[width=3in]{images/spmeasuregui.png}
+\caption{This simple GUI, reminiscent of previous examples, which asks only for the file directory that should be analyzed and will process all of the images matching the parameters in that directory. It selects specifically files that match the file naming pattern of surface plots and should be used directly after the previous script.}
+% Provide a label so we can cross\hyp{}reference it from the tex
+\label{figure:spmeasuregui}
+\end{figure}
 
 \begin{code}
 \caption{An R script to capture the maximum point along the profile generated by the previous scripts and then calculate the area under the curve to compare different biological groups to one another.}
@@ -294,7 +326,15 @@ One of the major routine tasks in the field of zebrafish-\textit{M. marinum} hos
 
 \end{code}
 
-This graphical user interface facilitates automatic processing of arbitrary numbers of images at once by allowing users to select various parameters to test for appropriateness in their particular experiment. The underlying logic will automatically create Z projections if applicable and then use those for subsequent analysis. Users are encouraged to select a subset of images to start and the computational thresholds are used to capture any objects over a certain size for background removal, which will typically only capture the yolk and any background fluorescence. This approach also allows for more generous manual thresholds to be selected for quantitation, an issue that often arises in manual approaches to fluorescence quantitation due to the need to accommodate this autofluorescence. 
+This graphical user interface facilitates automatic processing of arbitrary numbers of images at once by allowing users to select various parameters to test for appropriateness in their particular experiment (\autoref{figure:burdengui}). The underlying logic will automatically create Z projections if applicable and then use those for subsequent analysis. Users are encouraged to select a subset of images to start and the computational thresholds are used to capture any objects over a certain size for background removal, which will typically only capture the yolk and any background fluorescence. This approach also allows for more generous manual thresholds to be selected for quantitation, an issue that often arises in manual approaches to fluorescence quantitation due to the need to accommodate this autofluorescence. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/burden_gui.png}
+\caption{This graphical user interface guides the user through providing all of the parameters needed to measure burden from a set of larval zebrafish images. All of these parameters require some tweaking by the user, but allows for subsetting to try different combinations to optimize burden measurements within a single experiment.}
+% Provide a label so we can cross\hyp{}reference it from the tex
+\label{figure:burdengui}
+\end{figure}
 
 It is my hope that this application, after further beta testing and refinement can supplant these manual approaches and replace them with something that free researcher time to conduct more experiments rather than spend many hours drawing circles around zebrafish in order to measure the bacterial burden of these fish. Additionally, this could in principle to adapted to measuring other aspects of zebrafish biology, from macrophage clustering to transcriptional reporter signals. The elegance of this approach is that it utilizes open-source and well-defined mechanisms for measuring signal over noise through the implementation of the automatic thresholds and wraps a set of utility functions within an interface that avoids the need for the end user to write burdensome macros to accomplish the same goal. This approach, after a minutes-long period of optimizing is able to measure the burden of thousands of larvae in mere minutes. The output can then be spot-checked for accuracy, as in a small subset of the larvae parts of the background may not be perfectly removed and these can then be reprocessed either manually or with altered parameters. 
 
