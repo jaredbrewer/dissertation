@@ -137,9 +137,33 @@ To address these challenges, I have developed a novel processing modality in Pyt
 
 The main body of code simply serves to process the files within the user-provided directory into useful bits of information that can ultimately be used to regenerate the file names of the desired images. These pieces (names, channels, scenes, and times) are then fed into the metamorpher() function, which contains a number of child functions that unify the processing pipeline into a set of logical statements based on user-provided booleans concerning the nature of their images. Some of these pieces of information could be extracted from the .nd file in future versions, which would further reduce user error or enable further levels of user customization (for instance, the precise range of the Z projection or the number of time points that should be processed). By focusing on text-level processing, the advantages of Python are enhanced while limiting the need for extraneous image processing, as only the images that will actually be used are loaded into memory and, once loaded, are rapidly condensed (by Z projection) and cleared. This results in very rapid image concatenation and merging that can condense terabyte-scale data into more readily interpretable data on the gigabyte-scale that can be readily read into the memory of most standard consumer-grade computers. Indeed, one of the advantages of this processing modality is that, while performance on workstation-class computers with expansive memory will always be superior, many of these processing tasks are now possible on consumer-grade hardware. For instance, this script has been demonstrated to be able to process a time lapse file set containing 12 stage positions of 1024 X, 1024 Y, and 10 Z across three channels and 321 time points into an easily manipulable set of 12 images (one for each stage position) in less than an hour on a 2021 14'' M1 Max MacBook Pro with 64 GB of unified memory. And thanks to the internal memory management of this script and the memory management of macOS, it should be reasonable to expect that such processing is possible (albeit potentially a bit slower) on less capable systems. In this instance, it was able to take $>$200 GB of files and condense them into 24 GB ($\sim$2 GB for each image set), which is relatively trivial to process. 
 
+\begin{figure}
+\centering
+\includegraphics[height=4in]{images/metamorphergui.png}
+\caption{When the metamorpher script is run, this is the first GUI to pop up, which requests the file directory where the images are saved as well as some basic details about the experiment: was it a time lapse, where there multiple stage positions, would the user like to show the images once they are generated, and would they like to use information from the .nd file, which is currently limited to the names of the stage positions provided at the time of experimental set up. Future versions should more exhaustively use what metadata is included in the .nd file to emulate the existing behavior of ``nd stack builder.''}
+% Provide a label so we can cross\hyp{}reference it from the tex
+\label{figure:metamorphergui}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[height=4in]{images/colormatcher.png}
+\caption{Once the directory has been selected, this will offer the use the option to match their channels with particular lookup tables based on the file name patterns. It helpfully provides which channel is which, which also offers flexibility across different types of experiments with different channels in different orders.}
+% Provide a label so we can cross\hyp{}reference it from the tex
+\label{figure:metacolormatcher}
+\end{figure}
+
 Future versions of this script should seek partial feature parity with the original ``nd stack builder'' as a means of more fully displacing this functionality. In its current version, this script is unable to take a subset of Z positions for projection, which should be functionality easily ported from previous scripts (\autoref{slowmanmip}). However, across such extensive time, the sample often moves and the full scope of the Z stack is often necessary to make for an approximately appropriate image across these time periods. Nevertheless, expanding this functionality seems useful for various edge-case scenarios. Advantageous to this is that the underlying processes are designed to be modular and have been consolidated into a number of defined functions that should allow for flexible expansion and addition of further logic. Additionally, the entire procedure is written in either base Python or using well-defined ImageJ functions, which should allow for relative code stability and, if Jython 3.x ever arrives, all of the code is written to be version independent and should function for 3.x versions of Python.
 
-Lastly, this should be ported to PyImageJ to further future-proof this process. This should be a comparatively straight-forward translation task now that the underlying logic is defined, but the subtle incompatibilities between these two approaches to using Python for ImageJ is a meaningful hurdle.
+\begin{figure}
+\centering
+\includegraphics[height=4in]{images/ndstackbuilder.png}
+\caption{This screenshot of the GUI used for ``nd stack builder'' shows the options provided, which integrates with the .ND files included by Metamorph in the file directory. These contain simple string-based metadata that the ``nd stack builder'' uses to process these images which is in contrast to my patterning-based approach.}
+% Provide a label so we can cross\hyp{}reference it from the tex
+\label{figure:ndstackbuilder}
+\end{figure}
+
+Lastly, this should be ported to PyImageJ to further future-proof this process. This should be a comparatively straight-forward translation task now that the underlying logic is defined, but the subtle incompatibilities between these two approaches to using Python for ImageJ are a meaningful hurdle.
 
 \section[Surface Plot Analysis for Cellular Distribution of Labeled Proteins]{Surface Plot Analysis for Cellular Distribution of Labeled Proteins\footnote{Taken from personal contributions to \citet{Saelens2022}.}}
 
