@@ -235,7 +235,7 @@
 % SIDE MARGINS:
 %--------------------------------------------------------------------------
 \oddsidemargin  36pt    % Left margin on odd-numbered pages.
-\evensidemargin 36pt   % Note that \oddsidemargin = \evensidemargin
+\evensidemargin 0pt   % Note that \oddsidemargin = \evensidemargin
 \marginparwidth 68pt   % Width of marginal notes.
 \marginparsep 10pt     % Horizontal space between outer margin and marginal note
 
