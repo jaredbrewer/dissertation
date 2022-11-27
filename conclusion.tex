@@ -16,7 +16,7 @@ These questions, among many others, are the subject of this concluding chapter a
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{images/lingeringquestions.pdf}
-\caption{A graphical representation of the major findings and questions from this work. While we have now added a critical piece of the equation, there are many questions remaining and many directions for this project to go that effectively interrogate each of the different players, from the bacteria to macrophages to the endothelium and interesting aspects of the interactions between them which will be outlined in the coming sections.}
+\caption[Major findings and lingering questions]{A graphical representation of the major findings and questions from this work. While we have now added a critical piece of the equation, there are many questions remaining and many directions for this project to go that effectively interrogate each of the different players, from the bacteria to macrophages to the endothelium and interesting aspects of the interactions between them which will be outlined in the coming sections.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:lingeringquestions}
 \end{figure}
@@ -34,7 +34,7 @@ Although large amino acid segments of CLRs are able to undergo radical changes i
 \begin{singlespace}
 \begin{center}
 \begin{longtable}{|>{\raggedright\arraybackslash}m{1.5in}|>{\raggedright\arraybackslash}m{4in}|}
-\caption{Criteria used to select putative zebrafish homologs of the human MINCLE.}\label{minctab} \tabularnewline
+\caption[Selection criteria for MINCLE homologs]{Criteria used to select putative zebrafish homologs of the human MINCLE.}\label{minctab} \tabularnewline
 
 \hline
 \thead{Criteria} & \thead{Rationale} \tabularnewline
@@ -59,7 +59,7 @@ Multiple approaches can be taken to identify the capacity of these proteins to b
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{images/mincle_expression.png}
-\caption{Comparison of the expression profiles of two of the putative MINCLE homologs, ENSDARG00000077975 and ENSDARG00000079903 based on existing RNA\hyp{}seq datasets in the Tobin lab. Both of these genes are generally restricted to macrophages and are induced by the presence of mycobacterial infection, an effect exceptionally notable for 77975. This provides some evidence that these genes are regulated by mycobacterial infection and may be playing some role in this context.}
+\caption[Expression profiles of two putative MINCLE homologs in the zebrafish]{Comparison of the expression profiles of two of the putative MINCLE homologs, ENSDARG00000077975 and ENSDARG00000079903 based on existing RNA\hyp{}seq datasets in the Tobin lab. Both of these genes are generally restricted to macrophages and are induced by the presence of mycobacterial infection, an effect exceptionally notable for 77975. This provides some evidence that these genes are regulated by mycobacterial infection and may be playing some role in this context.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:mincles}
 \end{figure}
@@ -69,7 +69,7 @@ In the zebrafish itself, I would actually propose to take a few steps backward a
 \begin{singlespace}
 \begin{table}
 \centering
-\caption{Putative zebrafish MINCLE homologs with key details about their native structure and mutants that have been generated thus far.}
+\caption[List of putative zebrafish MINCLE homologs]{Putative zebrafish MINCLE homologs with key details about their native structure and mutants that have been generated thus far.}
 \label{zfmincs} \tabularnewline
 \vspace{0.5cm}
 \begin{tabular}{|l|l|l|l|l|l|}
@@ -106,7 +106,7 @@ Additionally, it may be of some use to study the specific human MINCLE\hyp{}myco
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{images/56379_align.png}
-\caption{Pairwise structural alignment of the carbohydrate recognition domains of the human MINCLE and zebrafish 56379 showing strong structural overlap indicative of a common structure in excess of the amino acid level similarity.}
+\caption[Structural alignment of MINCLE and 56379]{Pairwise structural alignment of the carbohydrate recognition domains of the human MINCLE and zebrafish 56379 showing strong structural overlap indicative of a common structure in excess of the amino acid level similarity.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:56379}
 \end{figure}
@@ -114,7 +114,7 @@ Additionally, it may be of some use to study the specific human MINCLE\hyp{}myco
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{images/79903_align.png}
-\caption{Pairwise structural alignment of the carbohydrate recognition domains of the human MINCLE and zebrafish 79903 showing strong structural overlap indicative of a common structure in excess of the amino acid level similarity.}
+\caption[Structural alignment of MINCLE and 79903]{Pairwise structural alignment of the carbohydrate recognition domains of the human MINCLE and zebrafish 79903 showing strong structural overlap indicative of a common structure in excess of the amino acid level similarity.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:79903}
 \end{figure}
@@ -122,7 +122,7 @@ Additionally, it may be of some use to study the specific human MINCLE\hyp{}myco
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{images/77975_align.png}
-\caption{Pairwise structural alignment of the carbohydrate recognition domains of the human MINCLE and zebrafish 77975 showing strong structural overlap indicative of a common structure in excess of the amino acid level similarity.}
+\caption[Structural alignment of MINCLE and 77975]{Pairwise structural alignment of the carbohydrate recognition domains of the human MINCLE and zebrafish 77975 showing strong structural overlap indicative of a common structure in excess of the amino acid level similarity.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:77975}
 \end{figure}
@@ -139,14 +139,12 @@ In the environment of the granuloma, both the host and pathogen must adapt to re
 
 \subsection{HIF for HIF's Sake}\label{hif4hif}
 
-\citep{, , , , , Woods2022}
-
 HIF\hyp{}1$\upalpha$ has only recently been intensively studied in the context of tuberculosis, with many of the foundational studies coming from Philip Elks's lab in the zebrafish\footnote{There are also described roles for HIF\hyp{}2$\upalpha$ in regulating certain aspects of neutrophil biology during mycobacterial infection, but this is beyond the scope of the presently proposed work \citep{Thompson2014, Elks2015}.}. These early studies utilized both dominant\hyp{}negative and dominant\hyp{}active versions of the zebrafish \textit{hif1ab}\footnote{As is all too common, but rarely quite so penetrant, zebrafish have two copies of all of the HIF\hyp{}$\upalpha$ subunits, making for an expansive coding space for these genes in the zebrafish genome and each copy appears to have some distinct effects, making for both opportunity and frustration \citep{Elks2015}.} to modulate the activity of this pathway, particularly in neutrophils, and have found that activation of HIF\hyp{}1$\upalpha$ prolongs inflammation and improves mycobacterial clearance, suggesting that at early time points, HIF\hyp{}$\upalpha$ plays a protective role in infection \citep{Elks2011, Elks2013, Hammond2020}. These protective effects also extend to macrophages, where HIF\hyp{}1$\upalpha$ stabilization enhances bacterial killing, presumably related to alterations in metabolism \citep{Knight2018, Zenk2021}. However, it has also been shown that HIF\hyp{}1$\upalpha$ prolongs alveolar macrophage survival after injury, an effect that, if present during tuberculosis, may actually exacerbate disease due to the maladaptive nature of alveolar macrophage responses; prompt necrosis of these cells would likely be more beneficial than their continued survival as a protective niche for the bacteria \citep{Woods2022, Leemans2001}. Other studies have also identified an essential role for HIF\hyp{}1$\upalpha$ in both IFN\hyp{}$\upgamma$ responses and TNF\hyp{}$\upalpha$ expression, both of which are essential for bacterial control \citep{Braverman2016, Lewis2019, Flynn1993, Flynn1995}. However, unlike the responses in macrophages, HIF\hyp{}1$\upalpha$ stabilization in T cells inhibits effective cytotoxic responses, impairs host immunity, and induces disease tolerance, so it is clear that the balance of effects is critical to the determination of the overall role of HIF\hyp{}1$\upalpha$ during infection \citep{Liu2022b, Tzelepis2018}.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{images/hifreg.pdf}
-\caption{Schematic demonstrating the different states of HIF\hyp{}1$\upalpha$. (A) shows the standard normoxic state of HIF\hyp{}1$\upalpha$, where it is rapidly degraded by oxygen\hyp{}dependent enzymes; (B) these enzymes are inhibited in hypoxia, leading to HIF\hyp{}1$\upalpha$\hyp{}dependent transcription. (C) Immunological stimuli can result in HIF\hyp{}1$\upalpha$ transcription, leading to functional activation even in the absence of overt hypoxia.}
+\caption[HIF-1$\upalpha$ regulatory mechanisms]{Schematic demonstrating the different states of HIF\hyp{}1$\upalpha$. (A) shows the standard normoxic state of HIF\hyp{}1$\upalpha$, where it is rapidly degraded by oxygen\hyp{}dependent enzymes; (B) these enzymes are inhibited in hypoxia, leading to HIF\hyp{}1$\upalpha$\hyp{}dependent transcription. (C) Immunological stimuli can result in HIF\hyp{}1$\upalpha$ transcription, leading to functional activation even in the absence of overt hypoxia.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:hif}
 \end{figure}
@@ -207,7 +205,7 @@ To further dissect the contributions of other transcription factors to the NFAT\
 
 \begin{table}
 \centering
-\caption{Lentiviral expression constructs to assess the role of NFATC2 domains for induction of VEGFA signaling. All express the mPapaya fluorescent protein on the C\hyp{}terminus to allow for direct visualization.}
+\caption[Constitutively active NFATC2 constructs]{Lentiviral expression constructs to assess the role of NFATC2 domains for induction of VEGFA signaling. All express the mPapaya fluorescent protein on the C\hyp{}terminus to allow for direct visualization.}
 \label{table:canfat} \tabularnewline
 \vspace{0.5cm}
 \begin{tabular}{|p{2in}|p{3.5in}|}
@@ -316,7 +314,7 @@ Endothelins are short peptides that regulate the vasculature that have previousl
 
 A final point is the potential role for novel modes of cellular differentiation to play a role in modulating host angiogenesis. Studies in development and cancer have identified mesenchymal to endothelial transitions that allow for the direct incorporation of mesenchymal stem cells and macrophages into the structure of the endothelium itself whereby these cells adopt defining characteristics of the endothelium, including expression of vascular endothelial cadherin \citep{Ubil2014, Wu2007, Zhang2008b}. The contribution of the diverse types of macrophages within the granuloma, including those expressing both VEGFR2 and TIE2, to the vasculature is largely unknown, but the incorporation of mycobacterially subverted macrophages into the vasculature may be a further mechanism of coopting this system for the benefit of the invading bacteria \citep{deCortie2014, Hall2012}. Many further studies would be required to address this, but longer\hyp{}term fate mapping of \textit{flk1\textsuperscript{+}}, \textit{irg1\textsuperscript{+}} cells may open some possibilities for evaluating this process.
 
-\section{Contributions of the Vasculature to Mycobacterial Burden}
+\section{Precise Contributions of VEGFA Signaling to Mycobacterial Burden}
 
 Despite our knowledge that angiogenesis through VEGFA appears to increase bacterial burden, the precise mechanism by which this happens is unknown. Conceptually, these alterations could be through promotion of bacterial growth or inhibition of bacterial killing and our current knowledge is unable to definitively identify one, the other, or both of these mechanisms as contributing to the overall effect. Our oft\hyp{}stated assumption is that this is mediated by the provision of additional oxygen and nutrients to the bacteria, but the identity of these ``nutrients'' is not clear. This is not the only possible hypothesis for what is happening, however, and dissecting other possibilities is important for clarifying what, precisely, is occurring at the vasculature\hyp{}granuloma interface. 
 

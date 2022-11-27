@@ -62,7 +62,7 @@ This script will first open a GUI with a simple set of inputs: the minimum and m
 \begin{figure}
 \centering
 \includegraphics[height=2in]{images/mipgui.png}
-\caption{This is the entire graphical user interface and inputs required to run this script: the script asks for the top and bottom slices from the image of interest and then runs the rest of the script.}
+\caption[GUI for manual maximum intensity projections]{This is the entire graphical user interface for the manual maximum intensity projection and inputs required to run this script: the script asks for the top and bottom slices from the image of interest and then runs the rest of the script.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:mipgui}
 \end{figure}
@@ -88,7 +88,7 @@ The user interface prompts the user to provide a directory that contains all of 
 \begin{figure}
 \centering
 \includegraphics[width=3in]{images/automipgui.png}
-\caption{This GUI pop\hyp{}up asks the user for the file directory that they would like to process and will process only the images directly in that folder; it also asks for the file extension so that it will only process the desired images in case the user has additional data in that folder.}
+\caption[GUI for maximum intensity projection with automatic image opening]{This GUI pop\hyp{}up asks the user for the file directory that they would like to process and will process only the images directly in that folder; it also asks for the file extension so that it will only process the desired images in case the user has additional data in that folder.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:automipgui}
 \end{figure}
@@ -140,7 +140,7 @@ The main body of code simply serves to process the files within the user-provide
 \begin{figure}
 \centering
 \includegraphics[height=4in]{images/metamorphergui.png}
-\caption{When the metamorpher script is run, this is the first GUI to pop up, which requests the file directory where the images are saved as well as some basic details about the experiment: was it a time lapse, where there multiple stage positions, would the user like to show the images once they are generated, and would they like to use information from the .nd file, which is currently limited to the names of the stage positions provided at the time of experimental set up. Future versions should more exhaustively use what metadata is included in the .nd file to emulate the existing behavior of ``nd stack builder.''}
+\caption[First part of the GUI for metamorpher, which allows for the compilation of multidimensional Metamorph images]{When the metamorpher script is run, this is the first GUI to pop up, which requests the file directory where the images are saved as well as some basic details about the experiment: was it a time lapse, where there multiple stage positions, would the user like to show the images once they are generated, and would they like to use information from the .nd file, which is currently limited to the names of the stage positions provided at the time of experimental set up. Future versions should more exhaustively use what metadata is included in the .nd file to emulate the existing behavior of ``nd stack builder.''}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:metamorphergui}
 \end{figure}
@@ -148,7 +148,7 @@ The main body of code simply serves to process the files within the user-provide
 \begin{figure}
 \centering
 \includegraphics[height=4in]{images/colormatcher.png}
-\caption{Once the directory has been selected, this will offer the use the option to match their channels with particular lookup tables based on the file name patterns. It helpfully provides which channel is which, which also offers flexibility across different types of experiments with different channels in different orders.}
+\caption[Second part of the GUI for metamorpher, allowing the user to select the false colors for the different image channels]{Once the directory has been selected, this will offer the use the option to match their channels with particular lookup tables based on the file name patterns. It helpfully provides which channel is which, which also offers flexibility across different types of experiments with different channels in different orders.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:metacolormatcher}
 \end{figure}
@@ -158,7 +158,7 @@ Future versions of this script should seek partial feature parity with the origi
 \begin{figure}
 \centering
 \includegraphics[height=4in]{images/ndstackbuilder.png}
-\caption{This screenshot of the GUI used for ``nd stack builder'' shows the options provided, which integrates with the .ND files included by Metamorph in the file directory. These contain simple string-based metadata that the ``nd stack builder'' uses to process these images which is in contrast to my patterning-based approach.}
+\caption[GUI for the existing ``nd stack builder'' script]{This screenshot of the GUI used for ``nd stack builder'' shows the options provided, which integrates with the .ND files included by Metamorph in the file directory. These contain simple string-based metadata that the ``nd stack builder'' uses to process these images which is in contrast to my patterning-based approach.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:ndstackbuilder}
 \end{figure}
@@ -182,7 +182,7 @@ The first step of this pipeline is to isolate the cell using some reference chan
 \begin{figure}
 \centering
 \includegraphics[width=3in]{images/spgui.png}
-\caption{The user needs to provide a number of factors to allow for this function to operate properly: a file directory with the images that should be processed, the file extension, and a reference channel which should encompass approximately the entire cell, and the measurement channel, which is what the user wishes to actually measure.}
+\caption[GUI for cell isolation in the surface plot analysis pipeline]{The user needs to provide a number of factors to allow for this function to operate properly: a file directory with the images that should be processed, the file extension, and a reference channel which should encompass approximately the entire cell, and the measurement channel, which is what the user wishes to actually measure.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:spgui}
 \end{figure}
@@ -241,7 +241,7 @@ This script is key to capturing the points along the abstracted profile of the c
 \begin{figure}
 \centering
 \includegraphics[width=3in]{images/spmeasuregui.png}
-\caption{This simple GUI, reminiscent of previous examples, which asks only for the file directory that should be analyzed and will process all of the images matching the parameters in that directory. It selects specifically files that match the file naming pattern of surface plots and should be used directly after the previous script.}
+\caption[GUI for measuring the output from ``3D Surface Plot'']{This simple GUI, reminiscent of previous examples, which asks only for the file directory that should be analyzed and will process all of the images matching the parameters in that directory. It selects specifically files that match the file naming pattern of surface plots and should be used directly after the previous script.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:spmeasuregui}
 \end{figure}
@@ -375,7 +375,7 @@ This graphical user interface facilitates automatic processing of arbitrary numb
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{images/burden_gui.png}
-\caption{This graphical user interface guides the user through providing all of the parameters needed to measure burden from a set of larval zebrafish images. All of these parameters require some tweaking by the user, but allows for subsetting to try different combinations to optimize burden measurements within a single experiment.}
+\caption[GUI for measuring bacterial burden from larval zebrafish]{This graphical user interface guides the user through providing all of the parameters needed to measure burden from a set of larval zebrafish images. All of these parameters require some tweaking by the user, but allows for subsetting to try different combinations to optimize burden measurements within a single experiment.}
 % Provide a label so we can cross\hyp{}reference it from the tex
 \label{figure:burdengui}
 \end{figure}
