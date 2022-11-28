@@ -60,16 +60,19 @@
 \hyphenation{infl-amma-some}
 \hyphenation{lymph-angio-gene-sis}
 
-\DeclareDocumentCommand\dia{ o m }{%
-    \begin{enumerate}[%
-        ,label=\IfNoValueTF {#1} {}{#1:}
-        ,labelsep=8mm
-        ,nosep % optional
-        ,font=\color{black}
-        ]
-        \item #2
-    \end{enumerate}%  
-    }
+%\DeclareDocumentCommand\dia{ o m }{%
+%    \begin{enumerate}[%
+%        ,label=\IfNoValueTF {#1} {}{#1:}
+%        ,labelsep=8mm
+%        ,nosep % optional
+%        ,font=\color{black}
+%        ,leftmargin=*
+%        ,listparindent=0pt
+%        %,labelindent=0.5in
+%        ]
+%        \item #2
+%    \end{enumerate}%  
+%    }
 
 \newenvironment{code}{\captionsetup{type=listing}\singlespacing}{}
 \SetupFloatingEnvironment{listing}{name=Source Code}
