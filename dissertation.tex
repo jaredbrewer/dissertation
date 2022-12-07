@@ -60,6 +60,26 @@
 \hyphenation{infl-amma-some}
 \hyphenation{lymph-angio-gene-sis}
 
+\DeclareFieldFormat{entrynote}{\normalsize\itshape #1}
+
+\makeatletter
+\newrobustcmd{\addentrynote}[2]{%
+  \csdef{tohikoblx@entrynote@\the\c@refsection @#1}{#2}}
+
+\renewbibmacro*{finentry}{%
+  \ifcsundef{tohikoblx@entrynote@\the\c@refsection @\thefield{entrykey}}
+    {}
+    {\setunit{\finentrypunct\par}%
+     \printtext[entrynote]{\csuse{tohikoblx@entrynote@\the\c@refsection @\thefield{entrykey}}}%
+     \renewcommand*{\finentrypunct}{}}%
+  \finentry
+}
+\makeatother
+
+\newtoggle{bbx:boldentries}
+\DeclareBibliographyCategory{boldentry}
+\AtEveryBibitem{\ifboolexpr{togl {bbx:boldentries} and test {\ifcategory{boldentry}}}{\bfseries}{}}
+
 %\DeclareDocumentCommand\dia{ o m }{%
 %    \begin{enumerate}[%
 %        ,label=\IfNoValueTF {#1} {}{#1:}
@@ -108,11 +128,11 @@
 
 \abstract
 
-Pathological angiogenesis is a widespread biological phenomenon that influences the progression of various diseases, including autoimmune conditions, cancers, and microbial infections. One infection in particular, tuberculosis, has been found to induce a potent pro-angiogenic signaling cascade that facilitates bacterial growth and accelerates disease progression. A synthesis of early studies on bacterial factors that drive host angiogenesis with modern genetic findings identified the mycobacterial glycolipid trehalose 6-6'-dimycolate (TDM) as a critical factor driving vascular endothelial growth factor (VEGF) production and angiogenesis during mycobacterial infection. Despite these recent findings, many of the underlying host response mechanisms remain unknown. 
+Pathological angiogenesis is a widespread biological phenomenon that influences the progression of various diseases, including autoimmune conditions, cancers, and microbial infections. One infection in particular, tuberculosis, is associated with the induction of a potent pro-angiogenic signaling cascade that facilitates bacterial growth and accelerates disease progression. A synthesis of early studies on bacterial factors that drive host angiogenesis with modern genetic findings identified the mycobacterial glycolipid trehalose 6-6'-dimycolate (TDM) as a critical factor driving vascular endothelial growth factor (VEGFA) production and angiogenesis during mycobacterial infection. Despite these recent findings, many of the underlying host response mechanisms remain unknown. 
 
 The introductory chapter will serve to introduce the reader to the major concepts addressed in this work: \textit{Mycobacterium tuberculosis} and the disease it causes, the role of macrophages in health and disease, the function of pattern recognition receptors in detecting microbial ligands, the specific downstream intracellular signaling pathway of interest for this work (mediated by the transcription factor, nuclear factor of activated T cells, NFAT), the contributions of angiogenesis to diverse contexts and pathologies, and the promise of host-directed therapies to overcome challenges associated with traditional treatment approaches in infectious disease. 
 
-Chapter 2 describes the new and existing methodological approaches that were required to complete this work. This work utilizes the zebrafish-\textit{Mycobacterium marinum} model of tuberculosis infection to facilitate in depth \textit{in vivo} observations and quantitation of these phenomena. Using this model in tandem with human macrophage cell culture, I was able to model major aspects of the host-pathogen interface, enabling me to identify a critical role for a macrophage-C-type lectin receptor-NFATC2-VEGFA signaling axis required for the angiogenic response to mycobacterial infection and TDM, findings that comprise the core of this work and are detailed at length in Chapter 3. 
+Chapter 2 describes the new and existing methodological approaches that were required to complete this work. This work utilizes the zebrafish-\textit{Mycobacterium marinum} model of tuberculosis infection to facilitate in depth \textit{in vivo} observation and quantitation of these phenomena. Using this model in tandem with human macrophage cell culture, I was able to model major aspects of the host-pathogen interface, enabling me to identify a critical role for a macrophage-C-type lectin receptor-NFATC2-VEGFA signaling axis required for the angiogenic response to mycobacterial infection and TDM, findings that comprise the core of this work and are detailed at length in Chapter 3. 
 
 The analysis of the large amounts of data generated in this work required creative approaches to data processing and analysis. To this end, I have developed a set of novel processing modalities in Python and R that are capable of the rapid and reproducible processing of images as well as certain aspects of automated data collection therefrom. These macros, many written for the FIJI/ImageJ programming environment, serve as the infrastructure on which the rest of this work has been built. These will be detailed in Chapter 4.
 
@@ -120,13 +140,16 @@ Finally, this body of work leaves many questions as yet unanswered. While it is 
 
 \dedication
 
+\begin{center}
 For my constant motivation and inspiration \\
 who taught me to read and write \\
 who always believed I could do anything I set my mind to \\
 who supported me doing anything, no matter how silly \\
+who provided a rock of stability in a tumultuous world \\
 who dreamt of this \\
 \quad -- my Mamaw Barb \\
-\\
+\end{center}
+\vspace{0.5cm}
 I hope I have made her proud.
 
 
@@ -146,9 +169,9 @@ From the time of my birth, I had one member of my family who always knew I could
 
 My journey into the world of learning would not have been possible without the manifold contributions of those primary and secondary school teachers who saw my potential and worked to help me achieve it. From kindergarten all the way to my senior year of high school I had beacons who guided me to overcome the difficult cultural and familial conditions into which I was born and raised. These contributions are what set me on the path to where I am today and I will forever appreciate those who strove to uplift students from the difficult educational environment of Barbourville.
 
-The inflection point of my life was the four years I spent at Transylvania University. It was truly the place where everything changed. This was the place where I really found myself and was pushed to my intellectual limits and beyond and was the place I truly discovered a love for teaching. Paul Duffin introduced me to the wonders of bench science and gave me a platform to learn, discover, and fail that provided me the precise mentality I needed to succeed in graduate school. Scott Whiddon has always been my \#1 cheerleader and has been an invaluable source of support both throughout my time at Transylvania and into the present day. Michael Cairo sparked in me a love for political science and gave me the support, affirmation, and down-to-earth advising I needed to find my own academic identity. Lastly, Jeff Freyman gave me the most rigorous and exhilarating set of academic experiences of my life to date -- the courses I took with him showed me the power to change someone's life in the classroom because his courses, approach to teaching, and pursuit of the Truth changed my entire worldview. More than perhaps anybody else, Jeff showed me how academia can be a path to the \textit{bonum vitae} and set me on this path I am now at yet another crossroads along.
+The inflection point of my life was the four years I spent at Transylvania University. It was truly the place where everything changed. This was where I really found myself and was pushed to my intellectual limits and beyond and I  discovered a true passion for teaching. Paul Duffin introduced me to the wonders of bench science and gave me a platform to learn, discover, and fail that provided me the precise mentality I needed to succeed in graduate school. Scott Whiddon has always been my \#1 cheerleader and has been an invaluable source of support both throughout my time at Transylvania and into the present day. Michael Cairo sparked in me a love for political science and gave me the support, affirmation, and down-to-earth advising I needed to find my own academic identity. Lastly, Jeff Freyman gave me the most rigorous and exhilarating set of academic experiences of my life to date -- the courses I took with him showed me the power to change someone's life in the classroom because his courses, approach to teaching, and pursuit of the Truth changed my entire worldview. More than perhaps anybody else, Jeff showed me how academia can be a path to the \textit{bonum vitae} and set me on this path I am now at yet another crossroads along.
 
-Of course, college is not merely the classes you take and I had the privilege of meeting countless friends who taught me who I was and who I wanted to become, many of whom have been with me continuously for the past decade. Bobby Puckett is the first of my peers I had ever met who filled me with intellectual awe and his mentorship, especially in my first-year of college set me on a path to further success. He believed in me, encouraged me, humbled me, and supported me all along this path I have taken and fostered my emotional and mental development in untold ways through my entire first-year. I also had the privilege to surround myself with an amazing set of immediate peers -- Chanslor Gallenstein, Drew Cunningham, Ryan Hanson, Susan Northcutt, and Quentin Becker -- who have been there from the day we moved into Clay Hall until today. And Rachel Johnson kept my ego in check as she outperformed and outclassed me at every turn and taught me so much about humility and grace (and what tuberculosis was). As my college career advanced, I had the opportunity to meet incredible people at every stage who made a difference. Jared Auton is an impeccable soul with a fervor for art that taught me about the beauty of the world around us. Daniel Martell and John Mays gave me invaluable opportunities in mentorship and taught me how \textit{I} could make a real difference in the lives of others. And Daniel Cooper is shining light of positivity and joy who keeps me thinking with a positive mindset and with nothing but hope for the future. There are undoubtedly others I have missed, but the sum of those four years and the people who touched my life throughout them have been essential to my personal growth and success.
+Of course, college is not merely the classes you take and I had the privilege of meeting countless friends who taught me who I was and who I wanted to become, many of whom have been with me continuously for the past decade. Bobby Puckett is the first of my peers I had ever met who filled me with intellectual awe and his mentorship, especially in my first-year of college, set me on a path to further success. He believed in me, encouraged me, humbled me, and supported me all along this path I have taken and fostered my emotional and mental development in untold ways through my entire first-year and continuously into the present. I also had the privilege to surround myself with an amazing set of immediate peers -- Chanslor Gallenstein, Drew Cunningham, Ryan Hanson, Susan Northcutt, and Quentin Becker -- who have been there from the day we moved into Clay Hall until today. And Rachel Johnson kept my ego in check as she outperformed and outclassed me at every turn and taught me so much about humility and grace (and what tuberculosis was). As my college career advanced, I had the opportunity to meet incredible people at every stage who made a difference. Jared Auton is an impeccable soul with a fervor for art who taught me about the beauty of the world around us. Daniel Martell and John Mays gave me invaluable opportunities in mentorship and taught me how \textit{I} could make a real difference in the lives of others. And Daniel Cooper is shining light of positivity and joy who keeps me thinking with an optimistic mindset and with nothing but hope for the future. There are undoubtedly others I have missed, but the sum of those four years and the people who touched my life throughout them have been essential to my personal growth and success.
 
 Graduate school itself, of course, has been a wonderful experience in growth and challenge. From the first days of this experience, there has been one person who I have been able to rely on for support -- Andy Alspaugh. He has always believed in me and my ability to go on and has always encouraged me to pursue my dreams. His kindness is an immeasurable inspiration I can only vainly attempt to replicate for others. Graduate school has given me a body of peers who I have had the joy to meet and learn from at various stages, including Joe Saelens, Eric Walton, Ryan Finethy, Jessie Finethy, Molly Matty, Allison Roder, Shannon Esher, Hannah Brown, Al Harding, Matt Sacco, Stephen Walsh, Dulcemaria Hernandez, and Mollie Sweeney. These people have all impacted my life in critical ways and have helped me grow into the scientist (and adult) I am today. Lastly, I would like to thank Mark Cronan, the devil always on my shoulder encouraging me to try the risky experiment and who kept me in the lab way too late with riveting scientific, political, and personal conversation. He is my model of how to be a great scientist and I am fortunate to have had the pleasure to know him. My time in Durham has also brought a lost connection back -- Austin Farmer -- one of the very few who also left our hometown to experience something different and pursue his dreams and we have picked right back up where we left off ten years ago. 
 
@@ -179,7 +202,7 @@ Lastly, I want to thank my loving partner in this life, Kristen Stockdale, who h
 \input{methods}
 \end{doublespace}
 
-\chapter[Macrophage NFATC2 Drives Angiogenic Signaling During Mycobacterial Infection]{Macrophage NFATC2 Drives Angiogenic Signaling During Mycobacterial Infection\footnote{Most of the data in this chapter is from \fullcite{Brewer2022}, text extensively modified.}}\label{chap3}
+\chapter[Macrophage NFATC2 Mediates Angiogenic Signaling During Mycobacterial Infection]{Macrophage NFATC2 Mediates Angiogenic Signaling During Mycobacterial Infection\footnote{Most of the data in this chapter is from \fullcite{Brewer2022}, text extensively modified.}}\label{chap3}
 
 \begin{doublespace}
 \input{nfat}
@@ -214,10 +237,18 @@ Lastly, I want to thank my loving partner in this life, Kristen Stockdale, who h
 % \bibliographystyle{agsm}
 % \printbibliography[heading=bibintoc,title={Bibliography}]
 
+\defbibnote{myprenote}{In this bibliography, a subset of the entries are in \textbf{bold} to indicate their relative importance and their potential interest for the reader. Other entries are provided annotation below the citation to provide additional context. These are distributed throughout this section and I hope they are of use to the reader in finding additional resources.}
+
+\addtocategory{boldentry}{Oehlers2015, Walton2018, Datta2015, Gonzalez2017, Adams2011, Agarwal2000, Alderwick2015, Amersfoort2022, Aramburu1999, Augustin2009, Behler2015, Behler2012, Behling1993, Boros2003, Bowdish2009, Brewer2022, Britto2018, Brown2018, Cadena2016, Cadena2017, Cambier2014b, CanteBarrett2007, Casadevall1999, Casadevall2003, Chalke1962, Chang2004, Chow1997, Chung2013, Cicchese2020, Clay2007, Colombo2022, Conboy1999, Cooper1993, Cooper1997, Cosma2004, Crabtree2002, Cronan2016, Cronan2021, Cudkowicz1952, Das2013, Davis2002, Davis2009, Deerhake2021, Diehl2002, Divangahi2013, Driever1994, Ehlers2012, Eisen2020, Flynn1993, Flynn1995, Fric2012a, Gagneux2018, Geijtenbeek2003, Gerri2017, Glickman2001, Glickman2000, Goodridge2007, Greenblatt2010, Grunwald2002, Harding2019, Heitmann2013, Ishikawa2009, Jambusaria2020, Jankute2015, Jayachandran2007, Kaminuma2008, Kar2016, Kar2015, Keane2000, Kwan2007, Lee2012, Leung1989, Lyakh1997, MacMicking1997b, Martinez2014, McCaffrey2022, McCaffrey1993, Mills2000, Molloy1994, MorenoMateos2015, Muller2010, Mullins1994, Nahrendorf2016, OGarra2013, Pagan2018, Peuker2022, Polena2016, Poli2022, Ramakrishnan2012, Rao2005, Rhoades2003, Rogers2005, Rossi2015, Rueden2017, Saita2000, Sakaguchi2000, Schneider2012, Schuermann2014, Shen2022, Stainier1995, Stinear2008, Swaim2006, Torraca2017, Turgut2011, Ulrich2012, Varol2015, Via2012, Vymazal2021, WalczakDrzewiecka2008, Wallis2015, Weis2011, Welch2015, Wilson2015, Wilson2019, Yamasaki2008, Yarilina2011}
+\toggletrue{bbx:boldentries}
+
+% Add notes to entries
+\addentrynote{Oehlers2015}{This paper, from the Tobin Lab, was the first in a pioneering series of publications in the field of tuberculosis pathogenesis at large to address the nature of the angiogenesis phenomenon during infection. This has set the stage for the primary work I have presented in \autoref{chap3} and is foundational to our understanding of mycobacterial engagement with the vasculature.}
+
 %\begin{FlushLeft}
 \setlength\bibitemsep{12pt}
 \emergencystretch=1em
-\printbibliography[category=cited, heading=bibintoc]
+\printbibliography[category=cited, heading=bibintoc, prenote=myprenote]
 %\printbibliography[title={Cite Me Please},notcategory=cited]
 %\end{FlushLeft}
 

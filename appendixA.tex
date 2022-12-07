@@ -53,8 +53,9 @@ donkey anti-mouse IgG Alexa Fluor 488 & ThermoFisher	 & \#A-21202 \\
 \hline
 \textit{Mycobacterium marinum} M / pMSP12:mCerulean & \cite{Oehlers2015}	& N/A \\
 \hline
-\textit{Mycobacterium marinum} M / pMSP12:tdTomato & \cite{Cambier2014} & N/A \\
+\textit{Mycobacterium marinum} M / pMSP12:tdTomato & \cite{Cambier2014b} & N/A \\
 \hline
+\textit{Mycobacterium marinum} M / pMSP12:eBFP2 & \cite{Takaki2013} & N/A \\
 Gamma-irradiated \textit{Mycobacterium tuberculosis} H37Rv & BEI & \#NR-49098 \\
 \hline
 NEB 5-alpha Competent \textit{Escherichia coli} (High Efficiency) & NEB & \#C2987H \\
@@ -175,9 +176,11 @@ RNA Cleanup Kit (50 \textmu g) & NEB & \#T2040L \\
 6.5mm ceramic beads & Omni & \#19-682 \\ 
 \hline 
 Petri dishes for embryonic zebrafish & Sarstedt & \#83-3902-500 \\ 
-\hline 
+\hline
+BAY 61-3606 & Selleck Chemicals & \#S7006 \\
+\hline
 FK506 (tacrolimus) & Selleck Chemicals & \#S5003 \\ 
-\hline 
+\hline
 Methanol & Sigma-Aldrich & \#179337 \\ 
 \hline 
 Ammonium chloride & Sigma-Aldrich & \#254134 \\ 
@@ -240,7 +243,7 @@ Sodium phosphate dibasic heptahydrate & VWR  & \#BDH9296 \\
 \hline 
 2,2'-Azobis[2-(2-imidazolin-2-yl)propane]dihydrochloride & Wako Chemicals & \#VA-044 \\ 
 \hline 
-Magnesium chloride & WardÃs Scientific  & \#470301 \\ 
+Magnesium chloride & Ward's Scientific  & \#470301 \\ 
 \hline 
 
 \end{longtable}
@@ -292,9 +295,9 @@ HEK-293T & ATCC & \#CRL-2316 \\
 \hline
 \textit{Danio rerio} strain *AB & ZIRC & \#ZDB-GENO-960809-7 \\
 \hline
-Tg(\textit{irg1:tdTomato\textsuperscript{xt40}}) & This work & N/A \\
+Tg(\textit{irg1:tdTomato\textsuperscript{xt40}}) & \cite{Brewer2022} & N/A \\
 \hline
-Tg(\textit{irg1:VIVIT-tdTomato\textsuperscript{xt38}}) & This work & N/A \\
+Tg(\textit{irg1:VIVIT-tdTomato\textsuperscript{xt38}}) & \cite{Brewer2022} & N/A \\
 \hline
 Tg(\textit{kdrl:eGFP\textsuperscript{s843}}) & \cite{Jin2005} & N/A \\
 \hline
@@ -302,12 +305,13 @@ TgBAC(\textit{vegfaa:eGFP\textsuperscript{pd260}}) & \cite{Karra2018} & N/A \\
 \hline
 Tg(\textit{lyz}:\textit{DsRed2\textsuperscript{nz50}}) & \cite{Hall2007} & N/A \\
 \hline
-\textit{nfatc2a\textsuperscript{xt69}} & This work & N/A \\
+\textit{nfatc2a\textsuperscript{xt69}} & \cite{Brewer2022} & N/A \\
 \hline
-\textit{nfatc3a\textsuperscript{xt59}} & This work & N/A \\
+\textit{nfatc3a\textsuperscript{xt59}} & \cite{Brewer2022} & N/A \\
 \hline
-\textit{card9\textsuperscript{xt31}} & This work & N/A \\
+\textit{card9\textsuperscript{xt31}} & \cite{Brewer2022} & N/A \\
 \hline
+\textit{myd88\textsuperscript{xt29}} & \cite{Walton2018} & N/A \\
 
 \end{longtable}
 \end{center}
@@ -321,7 +325,7 @@ Tg(\textit{lyz}:\textit{DsRed2\textsuperscript{nz50}}) & \cite{Hall2007} & N/A \
 \hline
 p5E irg1 & Addgene \cite{Sanderson2015} & \#188698 \\
 \hline 
-pME VIVIT NS & This work; Addgene  & \#188699 \\ 
+pME VIVIT NS & \cite{Brewer2022}; Addgene  & \#188699 \\ 
 \hline 
 p3E tdTomato & Addgene \cite{Walton2015} & \#188700 \\ 
 \hline 
@@ -331,38 +335,49 @@ pDEST tol2 Ubb pA & Addgene \cite{Walton2015} & \#188701 \\
 \hline 
 p3e Ubb pA & Addgene \cite{Walton2015} &  \#188702 \\ 
 \hline 
-pTol2 irg1:VIVIT-tdTomato & This work & \\ 
+pTol2 irg1:VIVIT-tdTomato & \cite{Brewer2022} & \\ 
 \hline 
-pTol2 irg1:tdTomato & This work & \\ 
+pTol2 irg1:tdTomato & \cite{Brewer2022} & \\ 
 \hline 
-pLV hUbC-Cas9-P2A-Puro\_BsmBI-sgRNA & This work, derived from \cite{Kabadi2014, Sanjana2014}; Addgene  & \#188703 \\ 
+pLV hUbC-Cas9-P2A-Puro\_BsmBI-sgRNA & \cite{Brewer2022}, derived from \cite{Kabadi2014, Sanjana2014}; Addgene  & \#188703 \\ 
 \hline 
-pLV hUbC-Cas9-P2A-Puro sgRNA $\upalpha$ NFATC2 & This work, Addgene & \#188704 \\ 
+pLV hUbC-Cas9-P2A-Puro sgRNA $\upalpha$ NFATC2 & \cite{Brewer2022}, Addgene & \#188704 \\ 
 \hline 
-pLV hUbC-Cas9-P2A-Puro sgRNA $\upalpha$ Safe Targeting Loci & This work, Addgene & \#188705 \\ 
+pLV hUbC-Cas9-P2A-Puro sgRNA $\upalpha$ Safe Targeting Loci & \cite{Brewer2022}, Addgene & \#188705 \\ 
 \hline 
-phU6 NFATC2 & This work, Addgene & \#188708 \\ 
+phU6 NFATC2 & \cite{Brewer2022}, Addgene & \#188708 \\ 
 \hline 
-pmU6 NFATC2 & This work, Addgene & \#188709 \\ 
+pmU6 NFATC2 & \cite{Brewer2022}, Addgene & \#188709 \\ 
 \hline 
-p7SK NFATC2 & This work, Addgene & \#188710 \\ 
+p7SK NFATC2 & \cite{Brewer2022}, Addgene & \#188710 \\ 
 \hline 
-phH1 NFATC2 & This work, Addgene & \#188711 \\ 
+phH1 NFATC2 & \cite{Brewer2022}, Addgene & \#188711 \\ 
 \hline 
-phU6 ST & This work, Addgene & \#188712 \\ 
+phU6 ST & \cite{Brewer2022}, Addgene & \#188712 \\ 
 \hline 
-pmU6 ST & This work, Addgene & \#188713 \\ 
+pmU6 ST & \cite{Brewer2022}, Addgene & \#188713 \\ 
 \hline 
-p7SK ST & This work, Addgene & \#188714 \\ 
+p7SK ST & \cite{Brewer2022}, Addgene & \#188714 \\ 
 \hline 
-phH1 ST & This work, Addgene & \#188715 \\ 
+phH1 ST & \cite{Brewer2022}, Addgene & \#188715 \\ 
 \hline 
-psPAX2 & Addgene  & \#12260 \\ 
+psPAX2 & Addgene & \#12260 \\ 
 \hline 
-pMD2.G & Addgene  & \#12259 \\ 
+pMD2.G & Addgene & \#12259 \\ 
 \hline 
 sfGFP-C1 & \cite{Pedelacq2006}, Addgene & \#54579 \\
 \hline 
+\hline
+pLEX:ALFA-mPapaya & This work & N/A \\
+\hline
+pLEX:CA\hyp{}NFAT1-ALFA-mPapaya & This work & N/A \\
+\hline
+pLEX:CA\hyp{}NFAT1\hyp{}$\upDelta$DBD-ALFA-mPapaya & This work & N/A \\
+\hline
+pLEX:CA\hyp{}NFAT1\hyp{}$\upDelta$RIT-ALFA-mPapaya & This work & N/A \\
+\hline
+pLEX:CA\hyp{}NFAT1\hyp{}$\upDelta$DBD\hyp{}$\upDelta$RIT-ALFA-mPapaya & This work & N/A \\
+\hline
 
 \end{longtable}
 \end{center}
@@ -374,15 +389,15 @@ sfGFP-C1 & \cite{Pedelacq2006}, Addgene & \#54579 \\
 \hline
 \thead{Application} & \thead{Source/Citation} \\
 \hline
-R, 4.2.1 & \citep{RCoreTeam2022}\\ 
+R, 4.2.2 & \citep{RCoreTeam2022}\\ 
 \hline
-RStudio, 2022.06 "Spotted Wakerobin" & \citep{RStudioTeam2022} \\ 
+RStudio, 2022.12 "Elsbeth Geranium" & \citep{RStudioTeam2022} \\ 
 \hline
-FIJI/ImageJ2, 2.5.0 & \citep{Schindelin2012, Rueden2017}\\ 
+FIJI/ImageJ2, 2.9.0 & \citep{Schindelin2012, Rueden2017}\\ 
 \hline
-ImageJ, 1.53s & \citep{Schneider2012} \\ 
+ImageJ, 1.53u & \citep{Schneider2012} \\ 
 \hline
-Python/Jython, 2.7.18 & \citep{vanRossum1995} \\ 
+Python/Jython, 2.7.2 & \citep{vanRossum1995} \\ 
 \hline
 ggplot2, 3.3.5 & \citep{Wickham2009, Wickham2016, Wickham2022b} \\ 
 \hline
@@ -406,7 +421,7 @@ RColorBrewer, 1.1-3 & \citep{Neuwirth2022} \\
 \hline
 FSA, 0.9.3 & \citep{Ogle2022} \\ 
 \hline
-HRM Software, 3.0.2 & ThermoFisher \\
+HRM Software, 3.0.1 & ThermoFisher \\
 \hline
 
 \end{longtable}
@@ -465,6 +480,24 @@ nfatc2a gRNA 2 & \seqsplit{TAATACGACTCACTATAGGCAGCCCGTCGCCCCACGGGTTTTAGAGCTAGAA}
 \hline
 nfatc3a gRNA 1 & \seqsplit{TAATACGACTCACTATAGGGCAGTTTGCAGTAGTCATGTTTTAGAGCTAGAA} \\ 
 \hline
+nfatc2a crispant gRNA & \seqsplit{TAATACGACTCACTATAGGTCAGTCAGGTGAACTGTCGTTTTAGAGCTAGAA} \\
+\hline
+nfatc3a crispant gRNA & \seqsplit{TAATACGACTCACTATAGGTAGAGGCACTGACCTGCGGTTTTAGAGCTAGAA} \\
+\hline
+myd88 gRNA & \seqsplit{TAATACGACTCACTATAGGCGGCAGACTGGAGGACAGGTTTTAGAGCTAGAA} \\
+\hline
+card9 gRNA & \seqsplit{TAATACGACTCACTATAGGGCAAGGTGCTGAGCAGCGGTTTTAGAGCTAGAA} \\
+\hline
+ENSDARG00000056379 gRNA & \seqsplit{TAATACGACTCACTATAGGTGAAGTGTTTGAGAGGTCGTTTTAGAGCTAGAA} \\
+\hline
+ENSDARG00000077975 gRNA 1 & \seqsplit{TAATACGACTCACTATAGGCGAGGACTTTCTGTGGATGTTTTAGAGCTAGAA} \\
+\hline
+ENSDARG00000077975 gRNA 2 & \seqsplit{TAATACGACTCACTATAGGTCATATCTCCATTTGTCGGTTTTAGAGCTAGAA} \\
+\hline
+ENSDARG00000079903 gRNA 1 & \seqsplit{TAATACGACTCACTATAGGGAGGCAATAAGTGGAAGTGTTTTAGAGCTAGAA} \\
+\hline
+ENSDARG00000079903 gRNA 2 & \seqsplit{TAATACGACTCACTATAGGGCAATAAGTGGAAGTGGGGTTTTAGAGCTAGAA} \\
+\hline
 nfatc2a PflM1 sequencing/genotyping primer F (+ BGH Reverse) & \seqsplit{TAGAAGGCACAGTCGAGGCTCGAGGCTTTCTGGAGACCTCTGTCC} \\ 
 \hline
 nfatc2a PflMI sequencing/genotyping primer R (+ GAG Reverse) & \seqsplit{TGACACACATTCCACAGGGTCTCTAGAGGTTTGCCCTTCATATCCTGC} \\ 
@@ -472,6 +505,14 @@ nfatc2a PflMI sequencing/genotyping primer R (+ GAG Reverse) & \seqsplit{TGACACA
 nfatc2a MwoI genotyping primer F & \seqsplit{CCTCTATGCAAACGCACCTACG} \\ 
 \hline
 nfatc2a MwoI genotyping primer R & \seqsplit{GTGATGCTCCTTGTGGCCAC} \\ 
+\hline
+nfatc2a crispant HRMA primer F & \seqsplit{CTCTTTTTACGGCGAAAAAGCTGC} \\
+\hline
+nfatc2a crispant HRMA primer R & \seqsplit{GAAACAAACCTTGAAGTCCTGTTTGG} \\
+\hline
+nfatc3a crispant HRMA primer F & \seqsplit{CCCGGGAATGAAGAGCTGG} \\
+\hline
+nfatc3a crispant HRMA primer R & \seqsplit{GTGTTTCGCCTTTGCGATCC} \\
 \hline
 nfatc3a sequencing primer F (+ M13F-40) & \seqsplit{GTTTTCCCAGTCACGACCAGAAGGTCGAGCAGTTTGG} \\ 
 \hline
@@ -488,6 +529,34 @@ card9 sequencing primer R & \seqsplit{CTTCAGATTGTCTTCAGAACTCTTACC} \\
 card9 HRMA primer F & \seqsplit{CCTTATCTGAGACAGTGCAAGGTGC} \\ 
 \hline
 card9 HRMA primer R & \seqsplit{TTACCAACTTTGCGGCGTCTG} \\ 
+\hline
+myd88 HRMA primer F & \seqsplit{CCGAAAGAAACTGGGTCTGTTCC} \\
+\hline
+myd88 HRMA primer R & \seqsplit{ACGAGTTTCCCAGTCCGTCA} \\
+\hline
+ENSDARG00000056379 sequencing primer F & \seqsplit{GTTTTCCCAGTCACGACGACCTATACTCTCATCACAGAGC} \\
+\hline
+ENSDARG00000056379 sequencing primer R & \seqsplit{GTCAGACACAGATGCATTGC} \\
+\hline
+ENSDARG00000056379 HRMA primer F & \seqsplit{CACAAAGGAGTGAAGTGTTTGAGAGG} \\
+\hline
+ENSDARG00000056379 HRMA primer R & \seqsplit{GAGCAATAAGCAGGACAAGAGAAACC} \\
+\hline
+ENSDARG00000077975 sequencing primer F & \seqsplit{GTTTTCCCAGTCACGACATGAGCTGGTCTGAGAGC} \\
+\hline
+ENSDARG00000077975 sequencing primer R & \seqsplit{CATGAACGTTTTACCACTTACCC} \\
+\hline
+ENSDARG00000077975 HRMA primer F & \seqsplit{CAGAGGTTCATATCTCCATTTGTCGAGG} \\
+\hline
+ENSDARG00000077975 HRMA primer R & \seqsplit{TTGCCCTCGATCTCTTCGTCAG} \\
+\hline
+ENSDARG00000079903 sequencing primer F & \seqsplit{GTTTTCCCAGTCACGACTCATTATTAAGAGTGAAGAGAAGCAGG} \\
+\hline
+ENSDARG00000079903 sequencing primer R & \seqsplit{TGTTTTTGTAGGAATCCGATGC} \\
+\hline
+ENSDARG00000079903 HRMA primer F & \seqsplit{ACAGAGACTGGAGGCAATAAGTGG} \\
+\hline
+ENSDARG00000079903 HRMA primer R & \seqsplit{CCTTGATTCAGTGGTGAGTTATCCACC} \\
 \hline
 VIVIT genotyping primer F & \seqsplit{ATTCAGAGCTCGCACAGG} \\ 
 \hline

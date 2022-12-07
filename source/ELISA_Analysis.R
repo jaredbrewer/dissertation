@@ -56,6 +56,8 @@ exp2.aov <- aov(conc ~ treat*cond, data = exp2)
 
 ##
 
+# The standard curve on this one was broken for some reason, probably because it was the first try. But it is fine for confirmation given the other results and the consistence within the experiment.
+
 exp1 <- read.csv("./R_VEGF_ELISA_gMtb_INCA-6_8+24hr_091721.csv", header = T)
 exp1.aov <- aov(blanked_od ~ treat*cond, data = exp1)
 
@@ -71,7 +73,7 @@ elisa.plot <- ggplot(exp3, aes(x = cond, y = conc, color, fill = treat)) + scale
   stat_boxplot(geom='errorbar', width = 0.25, position = position_dodge(width = 0.9)) +
   xlab("Exposure Condition") + ylab("[VEGFA] pg/mL") + 
   geom_signif(y_position = c(15, 17, 19), xmin = c(0.8, 0.8, 1.8), xmax = c(1.8, 2.2, 2.2), annotations = c("p < 0.0001", "p = 0.101", "p < 0.0001"), textsize = 8, color = "black", vjust = -0.35) +
-  scale_x_discrete(limits = c("control", "mtb"), labels = c("Control", "γMtb")) +
+  scale_x_discrete(limits = c("control", "mtb"), labels = labs) +
   scale_fill_manual(name = "Treatment", labels = c("DMSO", "40μM INCA-6 "), values = c("firebrick3", "deepskyblue")) +
   theme_minimal() +
   theme(text = element_text(size = 20, face = "bold")) +
@@ -89,7 +91,7 @@ elisa.plot <- ggplot(exp2, aes(x = cond, y = conc, color, fill = treat)) + scale
   stat_boxplot(geom='errorbar', width = 0.25, position = position_dodge(width = 0.9)) +
   xlab("Exposure Condition") + ylab("[VEGFA] pg/mL") + 
   geom_signif(y_position = c(30, 34, 38), xmin = c(0.8, 0.8, 1.8), xmax = c(1.8, 2.2, 2.2), annotations = c("p < 0.0001", "p = 0.193", "p = 0.0001"), textsize = 8, color = "black", vjust = -0.35) +
-  scale_x_discrete(limits = c("control", "mtb"), labels = c("Control", "γMtb")) +
+  scale_x_discrete(limits = c("control", "mtb"), labels = labs) +
   scale_fill_manual(name = "Treatment", labels = c("DMSO", "40μM INCA-6 "), values = c("firebrick3", "deepskyblue")) +
   theme_minimal() +
   theme(text = element_text(size = 20, face = "bold")) +
@@ -107,7 +109,7 @@ elisa.plot <- ggplot(exp1, aes(x = cond, y = blanked_od, color, fill = treat)) +
   stat_boxplot(geom='errorbar', width = 0.25, position = position_dodge(width = 0.9)) +
   xlab("Exposure Condition") + ylab("Blanked OD") + 
   geom_signif(y_position = c(0.75, 1, 1.25), xmin = c(0.8, 0.8, 1.8), xmax = c(1.8, 2.2, 2.2), annotations = c("p < 0.0001", "p = 0.205", "p < 0.0001"), textsize = 8, color = "black", vjust = -0.35) +
-  scale_x_discrete(limits = c("control", "mtb"), labels = c("Control", "γMtb")) +
+  scale_x_discrete(limits = c("control", "mtb"), labels = labs) +
   scale_fill_manual(name = "Treatment", labels = c("DMSO", "40μM INCA-6 "), values = c("firebrick3", "deepskyblue")) +
   theme_minimal() +
   theme(text = element_text(size = 20, face = "bold")) +

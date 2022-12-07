@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# macOS ONLY
+# macOS or Linux/WSL ONLY
 
 # People need to have installed Anaconda for this to work. Presumably that can be done easily enough. Alt: execute another script first.
 
